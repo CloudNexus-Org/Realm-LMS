@@ -9,26 +9,15 @@ const CAREER_TRACKS = [
   "DevOps Engineering",
   "AI / Machine Learning",
   "Full Stack Development",
-  "Internet of Things",
-  "Digital Marketing",
-  "Graphic Designing",
-];
-
-const MODULES = [
-  "Module 1 — Guaranteed (₹1,49,999)",
-  "Module 2 — Accelerator (₹99,999)",
-  "Module 3 — Foundation (₹59,999)",
-  "Not sure yet",
 ];
 
 export default function EnrollmentForm() {
   const {
     fullName,
     phone,
-    age,
+    dateOfBirth,
     gender,
     careerTrack,
-    interestedModule,
     errors,
     apiError,
     loading,
@@ -51,11 +40,19 @@ export default function EnrollmentForm() {
       newErrors.phone = "Please enter a valid phone number";
     }
 
-    const ageNum = parseInt(age, 10);
-    if (!age || isNaN(ageNum)) {
-      newErrors.age = "Please enter your age";
-    } else if (ageNum < 16 || ageNum > 100) {
-      newErrors.age = "You must be between 16 and 100 years old";
+    if (!dateOfBirth) {
+      newErrors.dateOfBirth = "Please enter your date of birth";
+    } else {
+      const dob = new Date(dateOfBirth);
+      if (isNaN(dob.getTime())) {
+        newErrors.dateOfBirth = "Please enter a valid date";
+      } else {
+        const today = new Date();
+        const age = today.getFullYear() - dob.getFullYear();
+        if (age < 16 || age > 100) {
+          newErrors.dateOfBirth = "You must be between 16 and 100 years old";
+        }
+      }
     }
 
     if (!gender) {
@@ -64,10 +61,6 @@ export default function EnrollmentForm() {
 
     if (!careerTrack) {
       newErrors.careerTrack = "Please select a career track";
-    }
-
-    if (!interestedModule) {
-      newErrors.interestedModule = "Please select a module";
     }
 
     setErrors(newErrors);
@@ -86,19 +79,16 @@ export default function EnrollmentForm() {
       await api.post<ApiResponse<EnrollmentRecord>>("/api/enrollments", {
         fullName: fullName.trim(),
         phone: phone.trim(),
-        age: parseInt(age, 10),
+        dateOfBirth,
         gender,
         careerTrack,
-        interestedModule,
       });
 
-      // Reset fields but show success screen
       setField("fullName", "");
       setField("phone", "");
-      setField("age", "");
+      setField("dateOfBirth", "");
       setField("gender", "");
       setField("careerTrack", "DevOps Engineering");
-      setField("interestedModule", "Module 2 — Accelerator (₹99,999)");
       setErrors({});
       setApiError("");
       setSuccess(true);
@@ -132,7 +122,6 @@ export default function EnrollmentForm() {
           <h3>Request a callback</h3>
           <p className="sub">We&apos;ll reach out within one business day.</p>
           <form onSubmit={handleSubmit} noValidate>
-            {/* Full Name */}
             <div className="field">
               <label htmlFor="fname">Full name</label>
               <input
@@ -148,7 +137,6 @@ export default function EnrollmentForm() {
               )}
             </div>
 
-            {/* Phone */}
             <div className="field">
               <label htmlFor="fphone">Phone number</label>
               <input
@@ -164,25 +152,20 @@ export default function EnrollmentForm() {
               )}
             </div>
 
-            {/* Age */}
             <div className="field">
-              <label htmlFor="fage">Age</label>
+              <label htmlFor="fdob">Date of Birth</label>
               <input
-                type="number"
-                id="fage"
-                placeholder="Your age"
-                min="16"
-                max="100"
-                value={age}
-                onChange={(e) => setField("age", e.target.value)}
-                className={errors.age ? "error" : ""}
+                type="date"
+                id="fdob"
+                value={dateOfBirth}
+                onChange={(e) => setField("dateOfBirth", e.target.value)}
+                className={errors.dateOfBirth ? "error" : ""}
               />
-              {errors.age && (
-                <span className="field-error">{errors.age}</span>
+              {errors.dateOfBirth && (
+                <span className="field-error">{errors.dateOfBirth}</span>
               )}
             </div>
 
-            {/* Gender */}
             <div className="field">
               <label htmlFor="fgender">Gender</label>
               <select
@@ -201,7 +184,6 @@ export default function EnrollmentForm() {
               )}
             </div>
 
-            {/* Career Track */}
             <div className="field">
               <label htmlFor="ftrack">Career track</label>
               <select
@@ -216,24 +198,6 @@ export default function EnrollmentForm() {
               </select>
               {errors.careerTrack && (
                 <span className="field-error">{errors.careerTrack}</span>
-              )}
-            </div>
-
-            {/* Interested Module */}
-            <div className="field">
-              <label htmlFor="fmodule">Interested module</label>
-              <select
-                id="fmodule"
-                value={interestedModule}
-                onChange={(e) => setField("interestedModule", e.target.value)}
-                className={errors.interestedModule ? "error" : ""}
-              >
-                {MODULES.map((m) => (
-                  <option key={m}>{m}</option>
-                ))}
-              </select>
-              {errors.interestedModule && (
-                <span className="field-error">{errors.interestedModule}</span>
               )}
             </div>
 

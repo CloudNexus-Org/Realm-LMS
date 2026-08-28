@@ -12,10 +12,9 @@ export async function createEnrollmentService(
     id: (enrollment._id as { toString(): string }).toString(),
     fullName: enrollment.fullName,
     phone: enrollment.phone,
-    age: enrollment.age,
+    dateOfBirth: enrollment.dateOfBirth,
     gender: enrollment.gender,
     careerTrack: enrollment.careerTrack,
-    interestedModule: enrollment.interestedModule,
     createdAt: enrollment.createdAt,
     updatedAt: enrollment.updatedAt,
   };
@@ -27,10 +26,9 @@ export async function getAllEnrollmentsService(): Promise<EnrollmentRecord[]> {
     id: (e._id as { toString(): string }).toString(),
     fullName: e.fullName,
     phone: e.phone,
-    age: e.age,
+    dateOfBirth: e.dateOfBirth,
     gender: e.gender,
     careerTrack: e.careerTrack,
-    interestedModule: e.interestedModule,
     createdAt: e.createdAt,
     updatedAt: e.updatedAt,
   }));

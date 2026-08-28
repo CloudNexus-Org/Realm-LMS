@@ -3,10 +3,9 @@ import mongoose, { Document, Model, Schema } from "mongoose";
 export interface IEnrollment extends Document {
   fullName: string;
   phone: string;
-  age: number;
+  dateOfBirth: string;
   gender: "Male" | "Female" | "Other";
   careerTrack: string;
-  interestedModule: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -25,11 +24,9 @@ const enrollmentSchema = new Schema<IEnrollment>(
       required: [true, "Phone number is required"],
       trim: true,
     },
-    age: {
-      type: Number,
-      required: [true, "Age is required"],
-      min: [16, "Must be at least 16 years old"],
-      max: [100, "Age must be 100 or below"],
+    dateOfBirth: {
+      type: String,
+      required: [true, "Date of birth is required"],
     },
     gender: {
       type: String,
@@ -42,11 +39,6 @@ const enrollmentSchema = new Schema<IEnrollment>(
     careerTrack: {
       type: String,
       required: [true, "Career track is required"],
-      trim: true,
-    },
-    interestedModule: {
-      type: String,
-      required: [true, "Interested module is required"],
       trim: true,
     },
   },

@@ -5,28 +5,23 @@ import { create } from "zustand";
 interface FormErrors {
   fullName?: string;
   phone?: string;
-  age?: string;
+  dateOfBirth?: string;
   gender?: string;
   careerTrack?: string;
-  interestedModule?: string;
 }
 
 interface EnrollmentState {
-  // Form fields
   fullName: string;
   phone: string;
-  age: string;
+  dateOfBirth: string;
   gender: string;
   careerTrack: string;
-  interestedModule: string;
 
-  // UI state
   errors: FormErrors;
   apiError: string;
   loading: boolean;
   success: boolean;
 
-  // Actions
   setField: (field: keyof EnrollmentState, value: string) => void;
   setErrors: (errors: FormErrors) => void;
   setApiError: (error: string) => void;
@@ -38,10 +33,9 @@ interface EnrollmentState {
 const initialState = {
   fullName: "",
   phone: "",
-  age: "",
+  dateOfBirth: "",
   gender: "",
   careerTrack: "DevOps Engineering",
-  interestedModule: "Module 2 — Accelerator (₹99,999)",
   errors: {},
   apiError: "",
   loading: false,

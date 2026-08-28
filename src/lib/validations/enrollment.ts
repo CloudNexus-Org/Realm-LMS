@@ -16,14 +16,19 @@ export const enrollmentSchema = z.object({
       "Please enter a valid phone number"
     ),
 
-  age: z
-    .number({
-      required_error: "Age is required",
-      invalid_type_error: "Age must be a number",
-    })
-    .int("Age must be a whole number")
-    .min(16, "You must be at least 16 years old")
-    .max(100, "Age must be 100 or below"),
+  dateOfBirth: z
+    .string()
+    .min(1, "Please enter your date of birth")
+    .refine(
+      (val) => {
+        const dob = new Date(val);
+        if (isNaN(dob.getTime())) return false;
+        const today = new Date();
+        const age = today.getFullYear() - dob.getFullYear();
+        return age >= 16 && age <= 100;
+      },
+      { message: "You must be between 16 and 100 years old" }
+    ),
 
   gender: z.enum(["Male", "Female", "Other"], {
     errorMap: () => ({ message: "Please select a gender" }),
@@ -32,11 +37,6 @@ export const enrollmentSchema = z.object({
   careerTrack: z
     .string()
     .min(1, "Please select a career track")
-    .trim(),
-
-  interestedModule: z
-    .string()
-    .min(1, "Please select a module")
     .trim(),
 });
 

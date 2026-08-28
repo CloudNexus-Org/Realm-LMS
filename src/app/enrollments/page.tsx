@@ -55,10 +55,9 @@ export default async function EnrollmentsPage() {
                     <th>#</th>
                     <th>Full Name</th>
                     <th>Phone</th>
-                    <th>Age</th>
+                    <th>Date of Birth</th>
                     <th>Gender</th>
                     <th>Career Track</th>
-                    <th>Module</th>
                     <th>Submitted At</th>
                   </tr>
                 </thead>
@@ -68,10 +67,9 @@ export default async function EnrollmentsPage() {
                       <td>{index + 1}</td>
                       <td>{enrollment.fullName}</td>
                       <td>{enrollment.phone}</td>
-                      <td>{enrollment.age}</td>
+                      <td>{enrollment.dateOfBirth}</td>
                       <td>{enrollment.gender}</td>
                       <td>{enrollment.careerTrack}</td>
-                      <td>{enrollment.interestedModule}</td>
                       <td>
                         {new Date(enrollment.createdAt).toLocaleDateString(
                           "en-IN",

@@ -1,10 +1,9 @@
 export interface EnrollmentInput {
   fullName: string;
   phone: string;
-  age: number;
+  dateOfBirth: string;
   gender: "Male" | "Female" | "Other";
   careerTrack: string;
-  interestedModule: string;
 }
 
 export interface EnrollmentRecord extends EnrollmentInput {
