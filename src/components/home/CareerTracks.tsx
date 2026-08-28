@@ -3,7 +3,7 @@ import Link from "next/link";
 const tracks = [
   {
     icon: "DO",
-    slug: "devops-engineering",
+    slug: "devops",
     title: "DevOps Engineering",
     desc: "Master CI/CD, containers and cloud infrastructure — the discipline shortening every company's release cycle.",
     chips: ["Docker", "Kubernetes", "Jenkins", "AWS", "Terraform"],
@@ -11,7 +11,7 @@ const tracks = [
   },
   {
     icon: "AI",
-    slug: "ai-machine-learning",
+    slug: "ai-ml",
     title: "AI / Machine Learning",
     desc: "Build and ship models across healthcare, finance and retail — where automation is rewriting the job description.",
     chips: ["Python", "TensorFlow", "scikit-learn", "Pandas", "OpenCV"],
@@ -19,7 +19,7 @@ const tracks = [
   },
   {
     icon: "FS",
-    slug: "full-stack-development",
+    slug: "development",
     title: "Full Stack Development",
     desc: "Front-end finesse, back-end wizardry, database mastery — go from idea to a fully deployed, scalable web app.",
     chips: ["React", "Node.js", "Spring Boot", "MySQL", "Kafka"],
@@ -46,7 +46,7 @@ export default function CareerTracks() {
           {tracks.map((track) => (
             <Link
               key={track.icon}
-              href={`/tracks/${track.slug}`}
+              href={`/courses/${track.slug}`}
               className="track-card reveal"
             >
               <div className="track-icon">{track.icon}</div>

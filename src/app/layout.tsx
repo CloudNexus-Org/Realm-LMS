@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -28,6 +26,8 @@ export const metadata: Metadata = {
     "We train future DevOps Engineers, SDEs, and Data Engineers with live projects, real mentors, and a paid internship pipeline built to ship you straight into your first tech job.",
 };
 
+import HeaderFooterWrapper from "@/components/layout/HeaderFooterWrapper";
+
 export default function RootLayout({
   children,
 }: {
@@ -39,9 +39,7 @@ export default function RootLayout({
       className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}
     >
       <body suppressHydrationWarning>
-        <Navbar />
-        {children}
-        <Footer />
+        <HeaderFooterWrapper>{children}</HeaderFooterWrapper>
       </body>
     </html>
   );
