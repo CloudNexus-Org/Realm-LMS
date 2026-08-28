@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Realm Consulting — Deploy Your Career Into Tech</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink-900:#0A1421;
+    --ink-800:#101F35;
+    --ink-700:#16283F;
+    --ink-600:#1E3554;
+    --cyan-400:#2DD4BF;
+    --cyan-300:#7EE8DB;
+    --amber-400:#FFB454;
+    --paper-50:#F5F7FB;
+    --paper-100:#EBEFF6;
+    --slate-500:#5B6B84;
+    --slate-300:#9FADC4;
+    --white:#FFFFFF;
+    --line-dark:rgba(255,255,255,0.09);
+    --line-light:rgba(10,20,33,0.09);
+    --font-display:'Space Grotesk', sans-serif;
+    --font-body:'Inter', sans-serif;
+    --font-mono:'JetBrains Mono', monospace;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+
+  body{
+    font-family:var(--font-body);
+    background:var(--paper-50);
+    color:var(--ink-900);
+    line-height:1.5;
+    overflow-x:hidden;
+  }
+
+  img,svg{display:block; max-width:100%;}
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  button{font-family:inherit; cursor:pointer;}
+
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+  @media (max-width:640px){ .wrap{padding:0 20px;} }
+
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:12.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-weight:600;
+  }
+  .eyebrow::before{
+    content:"";
+    width:7px;height:7px;border-radius:50%;
+    background:var(--cyan-400);
+    box-shadow:0 0 0 3px rgba(45,212,191,0.18);
+  }
+
+  h1,h2,h3,h4{
+    font-family:var(--font-display);
+    font-weight:700;
+    line-height:1.08;
+    letter-spacing:-0.01em;
+  }
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:14px 26px;
+    border-radius:8px;
+    font-family:var(--font-mono);
+    font-size:14px;
+    font-weight:600;
+    letter-spacing:0.01em;
+    border:1px solid transparent;
+    transition:transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
+    white-space:nowrap;
+  }
+  .btn-primary{
+    background:var(--cyan-400);
+    color:var(--ink-900);
+    box-shadow:0 0 0 0 rgba(45,212,191,0);
+  }
+  .btn-primary:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 24px -6px rgba(45,212,191,0.55);
+  }
+  .btn-ghost{
+    background:transparent;
+    border-color:var(--line-dark);
+    color:var(--white);
+  }
+  .btn-ghost:hover{ border-color:var(--cyan-400); color:var(--cyan-300); }
+  .btn-ghost.on-light{ border-color:var(--line-light); color:var(--ink-900); }
+  .btn-ghost.on-light:hover{ border-color:var(--ink-900); }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(10,20,33,0.72);
+    backdrop-filter:blur(14px) saturate(140%);
+    -webkit-backdrop-filter:blur(14px) saturate(140%);
+    border-bottom:1px solid var(--line-dark);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 32px;
+    max-width:1180px; margin:0 auto;
+  }
+  .brand{
+    display:flex; align-items:center; gap:10px;
+    color:var(--white);
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:19px;
+    letter-spacing:-0.01em;
+  }
+  .brand .mark{ width:30px; height:30px; }
+  .nav-links{
+    display:flex; align-items:center; gap:34px;
+  }
+  .nav-links a{
+    color:var(--slate-300);
+    font-size:14.5px;
+    font-weight:500;
+    transition:color .15s ease;
+  }
+  .nav-links a:hover{ color:var(--white); }
+  .nav-cta{ display:flex; align-items:center; gap:16px; }
+  .hamburger{
+    display:none; flex-direction:column; gap:5px; background:none; border:none; padding:6px;
+  }
+  .hamburger span{ width:22px; height:2px; background:var(--white); border-radius:2px; }
+
+  @media (max-width:900px){
+    .nav-links{
+      position:fixed; top:65px; left:0; right:0;
+      background:var(--ink-900);
+      flex-direction:column; align-items:flex-start;
+      padding:24px 28px 30px;
+      border-bottom:1px solid var(--line-dark);
+      transform:translateY(-130%);
+      transition:transform .28s ease;
+      gap:20px;
+    }
+    .nav-links.open{ transform:translateY(0); }
+    .hamburger{ display:flex; }
+    .nav-cta .btn-ghost{ display:none; }
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:
+      radial-gradient(ellipse 900px 500px at 82% -10%, rgba(45,212,191,0.16), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 5% 20%, rgba(255,180,84,0.10), transparent 55%),
+      linear-gradient(180deg, var(--ink-900), var(--ink-800) 90%);
+    color:var(--white);
+    padding:150px 0 90px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(var(--line-dark) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-dark) 1px, transparent 1px);
+    background-size:64px 64px;
+    -webkit-mask-image:linear-gradient(180deg, rgba(0,0,0,0.5), transparent 75%);
+            mask-image:linear-gradient(180deg, rgba(0,0,0,0.5), transparent 75%);
+    pointer-events:none;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.05fr 0.95fr;
+    gap:56px;
+    align-items:center;
+    position:relative;
+  }
+  @media (max-width:960px){ .hero-grid{ grid-template-columns:1fr; } }
+
+  .hero .eyebrow{ color:var(--cyan-300); margin-bottom:22px; }
+  .hero h1{
+    font-size:clamp(34px, 5vw, 58px);
+    margin-bottom:22px;
+  }
+  .hero h1 .accent{ color:var(--cyan-400); }
+  .hero p.lede{
+    font-size:17.5px;
+    color:var(--slate-300);
+    max-width:520px;
+    margin-bottom:34px;
+  }
+  .hero-ctas{ display:flex; gap:14px; flex-wrap:wrap; margin-bottom:48px; }
+
+  .hero-stats{
+    display:flex; gap:34px; flex-wrap:wrap;
+    padding-top:30px;
+    border-top:1px solid var(--line-dark);
+  }
+  .stat-item .num{
+    font-family:var(--font-mono);
+    font-size:28px; font-weight:700; color:var(--cyan-300);
+    display:flex; align-items:baseline; gap:2px;
+  }
+  .stat-item .label{
+    font-size:12.5px; color:var(--slate-300); margin-top:4px;
+    text-transform:uppercase; letter-spacing:0.06em;
+  }
+
+  /* terminal mock */
+  .terminal{
+    background:var(--ink-700);
+    border:1px solid var(--line-dark);
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow:0 30px 70px -20px rgba(0,0,0,0.55);
+  }
+  .term-bar{
+    display:flex; align-items:center; gap:8px;
+    padding:13px 16px;
+    background:var(--ink-800);
+    border-bottom:1px solid var(--line-dark);
+  }
+  .term-bar span{ width:11px; height:11px; border-radius:50%; }
+  .term-bar span:nth-child(1){ background:#FF6B6B; }
+  .term-bar span:nth-child(2){ background:#FFD166; }
+  .term-bar span:nth-child(3){ background:#2DD4BF; }
+  .term-title{
+    margin-left:8px; font-family:var(--font-mono); font-size:12px; color:var(--slate-300);
+  }
+  .term-body{
+    padding:26px 24px 30px;
+    font-family:var(--font-mono);
+    font-size:13.6px;
+    line-height:1.9;
+    color:#CDE7E2;
+    min-height:280px;
+  }
+  .term-body .prompt{ color:var(--cyan-300); }
+  .term-body .comment{ color:var(--slate-300); }
+  .term-body .ok{ color:#7EE8DB; }
+  .term-body .amber{ color:var(--amber-400); }
+  .caret{
+    display:inline-block; width:8px; height:15px; background:var(--cyan-300);
+    animation:blink 1s steps(1) infinite; vertical-align:-2px;
+  }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  .badge-row{ display:flex; gap:10px; margin-top:20px; flex-wrap:wrap; }
+  .ci-badge{
+    display:inline-flex; align-items:center; gap:7px;
+    font-family:var(--font-mono); font-size:11.5px; font-weight:600;
+    padding:6px 11px; border-radius:5px;
+    background:rgba(45,212,191,0.12); color:var(--cyan-300);
+    border:1px solid rgba(45,212,191,0.28);
+    letter-spacing:0.03em;
+  }
+  .ci-badge.amber{ background:rgba(255,180,84,0.12); color:var(--amber-400); border-color:rgba(255,180,84,0.3); }
+  .ci-badge .dot{ width:6px; height:6px; border-radius:50%; background:currentColor; }
+
+  /* ---------- TRUSTED / CLIENTS ---------- */
+  .trusted{
+    background:var(--ink-900);
+    padding:34px 0 44px;
+    border-bottom:1px solid var(--line-dark);
+  }
+  .trusted p{
+    text-align:center; font-family:var(--font-mono); font-size:12px;
+    letter-spacing:0.12em; text-transform:uppercase; color:var(--slate-500);
+    margin-bottom:22px;
+  }
+  .logo-row{
+    display:flex; flex-wrap:wrap; justify-content:center; gap:14px;
+  }
+  .logo-chip{
+    font-family:var(--font-display); font-weight:600; font-size:15px;
+    color:var(--slate-300);
+    border:1px solid var(--line-dark);
+    padding:9px 18px; border-radius:999px;
+    opacity:0.85;
+    transition:opacity .2s ease, color .2s ease, border-color .2s ease;
+  }
+  .logo-chip:hover{ opacity:1; color:var(--white); border-color:var(--cyan-400); }
+
+  /* ---------- SECTION SHARED ---------- */
+  section{ padding:100px 0; }
+  .section-head{
+    max-width:640px; margin-bottom:56px;
+  }
+  .light-section .eyebrow{ color:#0E8F80; }
+  .light-section .eyebrow::before{ background:#0E8F80; }
+  .section-head h2{
+    font-size:clamp(28px,3.6vw,42px);
+    margin-top:14px;
+    color:var(--ink-900);
+  }
+  .section-head p{
+    font-size:16px; color:var(--slate-500); margin-top:16px;
+  }
+  .dark-section{ background:var(--ink-900); color:var(--white); }
+  .dark-section .section-head h2{ color:var(--white); }
+  .dark-section .section-head p{ color:var(--slate-300); }
+
+  .reveal{
+    opacity:0; transform:translateY(22px);
+    transition:opacity .6s ease, transform .6s ease;
+  }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  /* ---------- TRACKS ---------- */
+  .track-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:22px;
+  }
+  @media (max-width:900px){ .track-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:640px){ .track-grid{ grid-template-columns:1fr; } }
+
+  .track-card{
+    background:var(--white);
+    border:1px solid var(--line-light);
+    border-radius:14px;
+    padding:28px 24px;
+    display:flex; flex-direction:column; gap:14px;
+    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .track-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 20px 40px -18px rgba(16,31,53,0.22);
+    border-color:rgba(45,212,191,0.4);
+  }
+  .track-icon{
+    width:42px; height:42px; border-radius:10px;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--ink-900); color:var(--cyan-400);
+    font-family:var(--font-mono); font-weight:700; font-size:14px;
+  }
+  .track-card h3{ font-size:19px; color:var(--ink-900); }
+  .track-card p.desc{ font-size:14.3px; color:var(--slate-500); flex-grow:1; }
+  .track-stat{
+    font-family:var(--font-mono); font-size:12.5px; color:#0E8F80;
+    background:rgba(45,212,191,0.1); border:1px solid rgba(14,143,128,0.18);
+    padding:7px 10px; border-radius:6px; display:inline-block;
+  }
+  .chip-row{ display:flex; flex-wrap:wrap; gap:6px; }
+  .tool-chip{
+    font-family:var(--font-mono); font-size:11px; color:var(--slate-500);
+    background:var(--paper-100); border:1px solid var(--line-light);
+    padding:4px 8px; border-radius:5px;
+  }
+
+  /* ---------- PIPELINE / JOURNEY ---------- */
+  .pipeline{
+    position:relative;
+    margin-top:20px;
+  }
+  .pipeline-track{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:0;
+    position:relative;
+  }
+  .pipeline-line{
+    position:absolute; top:23px; left:0; right:0; height:2px;
+    background:var(--line-dark);
+    z-index:0;
+  }
+  .pipeline-line .fill{
+    position:absolute; top:0; left:0; height:100%; width:0%;
+    background:linear-gradient(90deg, var(--cyan-400), var(--amber-400));
+    transition:width 1.4s cubic-bezier(.2,.7,.3,1);
+  }
+  .pipeline-line.animate .fill{ width:100%; }
+  .stage{
+    position:relative; z-index:1;
+    padding:0 16px;
+    text-align:left;
+  }
+  .stage-node{
+    width:46px; height:46px; border-radius:50%;
+    background:var(--ink-900); border:2px solid var(--cyan-400);
+    color:var(--cyan-300);
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--font-mono); font-weight:700; font-size:14px;
+    margin-bottom:20px;
+  }
+  .stage .stage-tag{
+    font-family:var(--font-mono); font-size:11px; color:var(--amber-400);
+    letter-spacing:0.08em; text-transform:uppercase; display:block; margin-bottom:6px;
+  }
+  .stage h4{ font-size:17px; color:var(--white); margin-bottom:8px; }
+  .stage p{ font-size:13.6px; color:var(--slate-300); }
+  @media (max-width:840px){
+    .pipeline-track{ grid-template-columns:1fr; gap:36px; }
+    .pipeline-line{ top:0; left:23px; right:auto; bottom:0; width:2px; height:auto; }
+    .pipeline-line .fill{ width:100%; height:0%; }
+    .pipeline-line.animate .fill{ height:100%; }
+    .stage{ padding-left:66px; }
+    .stage-node{ position:absolute; left:0; top:0; margin-bottom:0; }
+  }
+
+  /* ---------- SUPPORT STRIP ---------- */
+  .support-grid{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:20px;
+  }
+  @media (max-width:900px){ .support-grid{ grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:520px){ .support-grid{ grid-template-columns:1fr;} }
+  .support-card{
+    background:var(--paper-100);
+    border-radius:12px; padding:24px 20px;
+    border:1px solid var(--line-light);
+  }
+  .support-card .n{
+    font-family:var(--font-mono); font-weight:700; font-size:26px; color:#0E8F80;
+    margin-bottom:6px;
+  }
+  .support-card h5{ font-size:14.5px; color:var(--ink-900); margin-bottom:6px; font-family:var(--font-display); }
+  .support-card p{ font-size:13px; color:var(--slate-500); }
+
+  /* ---------- PRICING ---------- */
+  .pricing-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:22px;
+    align-items:stretch;
+  }
+  @media (max-width:900px){ .pricing-grid{ grid-template-columns:1fr; max-width:420px; margin:0 auto;} }
+  .price-card{
+    background:var(--white);
+    border:1px solid var(--line-light);
+    border-radius:16px;
+    padding:32px 26px;
+    display:flex; flex-direction:column;
+    position:relative;
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .price-card:hover{ transform:translateY(-6px); box-shadow:0 24px 50px -20px rgba(16,31,53,0.25); }
+  .price-card.featured{
+    background:var(--ink-900); color:var(--white);
+    border-color:var(--ink-900);
+    transform:scale(1.035);
+  }
+  .price-card.featured:hover{ transform:scale(1.035) translateY(-6px); }
+  .price-badge{
+    position:absolute; top:-13px; left:26px;
+    font-family:var(--font-mono); font-size:11px; font-weight:700;
+    background:var(--amber-400); color:var(--ink-900);
+    padding:5px 12px; border-radius:999px; letter-spacing:0.03em;
+  }
+  .price-card .module-tag{
+    font-family:var(--font-mono); font-size:12px; color:#0E8F80; letter-spacing:0.08em; text-transform:uppercase;
+  }
+  .price-card.featured .module-tag{ color:var(--cyan-300); }
+  .price-card h3{ font-size:22px; margin:10px 0 4px; }
+  .price{
+    font-family:var(--font-mono); font-size:38px; font-weight:700; margin:14px 0 4px;
+  }
+  .price span{ font-size:15px; font-weight:500; color:var(--slate-500); }
+  .price-card.featured .price span{ color:var(--slate-300); }
+  .price-note{ font-size:12px; color:var(--slate-500); margin-bottom:22px; }
+  .price-card.featured .price-note{ color:var(--slate-300); }
+  .price-features{ flex-grow:1; margin-bottom:26px; }
+  .price-features li{
+    display:flex; align-items:flex-start; gap:10px;
+    font-size:14px; padding:8px 0;
+    border-bottom:1px dashed var(--line-light);
+  }
+  .price-card.featured .price-features li{ border-bottom:1px dashed var(--line-dark); }
+  .price-features li:last-child{ border-bottom:none; }
+  .check{
+    flex-shrink:0; width:18px; height:18px; margin-top:1px;
+    color:#0E8F80;
+  }
+  .price-card.featured .check{ color:var(--cyan-400); }
+  .price-cta{ width:100%; justify-content:center; }
+
+  /* ---------- WHY US ---------- */
+  .why-grid{
+    display:grid; grid-template-columns:1.1fr 1fr; gap:60px; align-items:start;
+  }
+  @media (max-width:900px){ .why-grid{ grid-template-columns:1fr; } }
+  .why-list li{
+    display:flex; gap:16px; padding:20px 0; border-top:1px solid var(--line-light);
+  }
+  .why-list li:last-child{ border-bottom:1px solid var(--line-light); }
+  .why-num{
+    font-family:var(--font-mono); font-weight:700; color:#0E8F80; font-size:14px;
+    flex-shrink:0; width:28px; padding-top:2px;
+  }
+  .why-list h4{ font-size:16.5px; color:var(--ink-900); margin-bottom:4px; }
+  .why-list p{ font-size:14px; color:var(--slate-500); }
+
+  .why-panel{
+    background:var(--ink-900); color:var(--white);
+    border-radius:16px; padding:34px 30px;
+  }
+  .why-panel .eyebrow{ color:var(--cyan-300); margin-bottom:16px; }
+  .why-panel h3{ font-size:22px; margin-bottom:14px; }
+  .why-panel p{ font-size:14.5px; color:var(--slate-300); margin-bottom:24px; }
+  .mini-stats{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .mini-stats .item{ border:1px solid var(--line-dark); border-radius:10px; padding:16px; }
+  .mini-stats .num{ font-family:var(--font-mono); font-weight:700; color:var(--amber-400); font-size:22px; }
+  .mini-stats .lbl{ font-size:12px; color:var(--slate-300); margin-top:4px; }
+
+  /* ---------- CONTACT ---------- */
+  .contact-wrap{
+    display:grid; grid-template-columns:1fr 1fr; gap:50px;
+  }
+  @media (max-width:900px){ .contact-wrap{ grid-template-columns:1fr; } }
+  .contact-info h2{ font-size:clamp(28px,3.6vw,40px); margin-bottom:16px; }
+  .contact-info p{ color:var(--slate-300); font-size:15.5px; margin-bottom:30px; max-width:440px; }
+  .contact-detail{
+    display:flex; gap:14px; padding:16px 0; border-top:1px solid var(--line-dark);
+  }
+  .contact-detail:last-child{ border-bottom:1px solid var(--line-dark); }
+  .contact-detail .ic{
+    width:38px; height:38px; border-radius:9px; background:rgba(45,212,191,0.12);
+    color:var(--cyan-300); display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .contact-detail .lbl{ font-family:var(--font-mono); font-size:11px; color:var(--slate-500); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:3px;}
+  .contact-detail .val{ font-size:14.5px; color:var(--white); }
+
+  .form-card{
+    background:var(--white); border-radius:16px; padding:32px;
+    color:var(--ink-900);
+  }
+  .form-card h3{ font-size:19px; margin-bottom:6px; }
+  .form-card .sub{ font-size:13.5px; color:var(--slate-500); margin-bottom:22px; }
+  .field{ margin-bottom:16px; }
+  .field label{ display:block; font-size:12.5px; font-weight:600; margin-bottom:6px; color:var(--ink-900); }
+  .field input, .field select{
+    width:100%; padding:12px 13px; border-radius:8px; border:1px solid var(--line-light);
+    font-family:var(--font-body); font-size:14px; background:var(--paper-50);
+    outline:none; transition:border-color .15s ease;
+  }
+  .field input:focus, .field select:focus{ border-color:var(--cyan-400); }
+  .form-submit{ width:100%; justify-content:center; margin-top:6px; }
+  .form-note{ font-size:11.5px; color:var(--slate-500); margin-top:12px; text-align:center; }
+  .form-success{
+    display:none; text-align:center; padding:20px 0;
+  }
+  .form-success .tick{
+    width:52px; height:52px; border-radius:50%; background:rgba(45,212,191,0.12); color:#0E8F80;
+    display:flex; align-items:center; justify-content:center; margin:0 auto 14px;
+  }
+  .form-success h4{ font-size:17px; margin-bottom:6px; }
+  .form-success p{ font-size:13.5px; color:var(--slate-500); }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--ink-900); color:var(--slate-300);
+    border-top:1px solid var(--line-dark);
+    padding:36px 0;
+  }
+  .foot-row{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;
+  }
+  .foot-brand{ display:flex; align-items:center; gap:9px; color:var(--white); font-family:var(--font-display); font-weight:700; }
+  .foot-links{ display:flex; gap:22px; flex-wrap:wrap; }
+  .foot-links a{ font-size:13.5px; color:var(--slate-300); }
+  .foot-links a:hover{ color:var(--cyan-300); }
+  .foot-legal{ font-size:12px; color:var(--slate-500); margin-top:22px; text-align:center; font-family:var(--font-mono); }
+
+  /* keyframes for typing dots pulse on badge */
+  @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:0.45;} }
+  .ci-badge .dot{ animation:pulse 1.6s ease-in-out infinite; }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="#home" class="brand">
+      <svg class="mark" viewBox="0 0 30 30" fill="none">
+        <rect x="1" y="1" width="28" height="28" rx="7" stroke="#2DD4BF" stroke-width="1.6"/>
+        <path d="M9 20V10h5.2c2.2 0 3.8 1.5 3.8 3.5S16.4 17 14.2 17H12l4 3" stroke="#2DD4BF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Realm Consulting
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#tracks">Career Tracks</a></li>
+      <li><a href="#pipeline">How It Works</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#why">Why Us</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="#pricing" class="btn btn-ghost">View Pricing</a>
+      <a href="#contact" class="btn btn-primary">Enroll Now</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="home">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Realm Consulting · Career Engineering Institute</span>
+      <h1>Push Your Career to <span class="accent">Production.</span></h1>
+      <p class="lede">We train future DevOps Engineers, SDEs, and Data Engineers with live projects, real mentors, and a paid internship pipeline built to ship you straight into your first tech job.</p>
+      <div class="hero-ctas">
+        <a href="#pricing" class="btn btn-primary">
+          Choose Your Track
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#pipeline" class="btn btn-ghost">See How It Works</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="num" data-count="50" data-suffix="+">0+</div>
+          <div class="label">Hiring Partners</div>
+        </div>
+        <div class="stat-item">
+          <div class="num"><span data-count="6" data-prefix="₹">₹0</span><span style="font-size:15px;margin-left:2px;">LPA</span></div>
+          <div class="label">Average Salary</div>
+        </div>
+        <div class="stat-item">
+          <div class="num" data-count="100" data-suffix="%">0%</div>
+          <div class="label">Placement Ratio</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="terminal">
+        <div class="term-bar">
+          <span></span><span></span><span></span>
+          <span class="term-title"> </span>
+        </div>
+        <div class="term-body" id="termBody"></div>
+      </div>
+      <div class="badge-row">
+        <span class="ci-badge"><span class="dot"></span>BUILD: PASSING</span>
+        <span class="ci-badge amber"><span class="dot"></span>PLACEMENT: 100%</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TRUSTED ================= -->
+<div class="trusted">
+  <div class="wrap">
+    <p>Engineers we've placed now build for</p>
+    <div class="logo-row">
+      <span class="logo-chip">CVS Pharmacy</span>
+      <span class="logo-chip">TD Bank</span>
+      <span class="logo-chip">Bank of America</span>
+      <span class="logo-chip">ITE</span>
+      <span class="logo-chip">Bhashini</span>
+      <span class="logo-chip">VSN</span>
+    </div>
+  </div>
+</div>
+
+<!-- ================= TRACKS ================= -->
+<section class="light-section" id="tracks">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow" style="color:#0E8F80;">Choose Your Stack</span>
+      <h2>Six career tracks. One placement pipeline.</h2>
+      <p>Every track pairs hands-on tooling with live mentorship — pick the stack that matches where the market's hiring.</p>
+    </div>
+
+    <div class="track-grid">
+      <div class="track-card reveal">
+        <div class="track-icon">DO</div>
+        <h3>DevOps Engineering</h3>
+        <p class="desc">Master CI/CD, containers and cloud infrastructure — the discipline shortening every company's release cycle.</p>
+        <div class="chip-row">
+          <span class="tool-chip">Docker</span><span class="tool-chip">Kubernetes</span><span class="tool-chip">Jenkins</span><span class="tool-chip">AWS</span><span class="tool-chip">Terraform</span>
+        </div>
+        <span class="track-stat">1,70,000+ open roles worldwide</span>
+      </div>
+
+      <div class="track-card reveal">
+        <div class="track-icon">AI</div>
+        <h3>AI / Machine Learning</h3>
+        <p class="desc">Build and ship models across healthcare, finance and retail — where automation is rewriting the job description.</p>
+        <div class="chip-row">
+          <span class="tool-chip">Python</span><span class="tool-chip">TensorFlow</span><span class="tool-chip">scikit-learn</span><span class="tool-chip">Pandas</span><span class="tool-chip">OpenCV</span>
+        </div>
+        <span class="track-stat">High global demand, every sector</span>
+      </div>
+
+      <div class="track-card reveal">
+        <div class="track-icon">FS</div>
+        <h3>Full Stack Development</h3>
+        <p class="desc">Front-end finesse, back-end wizardry, database mastery — go from idea to a fully deployed, scalable web app.</p>
+        <div class="chip-row">
+          <span class="tool-chip">React</span><span class="tool-chip">Node.js</span><span class="tool-chip">Spring Boot</span><span class="tool-chip">MySQL</span><span class="tool-chip">Kafka</span>
+        </div>
+        <span class="track-stat">End-to-end product engineering</span>
+      </div>
+
+      <div class="track-card reveal">
+        <div class="track-icon">IoT</div>
+        <h3>Internet of Things</h3>
+        <p class="desc">Connect devices, sensors and systems that talk to each other — and build the automation layer behind them.</p>
+        <div class="chip-row">
+          <span class="tool-chip">Embedded C</span><span class="tool-chip">Sensors</span><span class="tool-chip">Edge Compute</span><span class="tool-chip">MQTT</span>
+        </div>
+        <span class="track-stat">Smarter devices, connected careers</span>
+      </div>
+
+      <div class="track-card reveal">
+        <div class="track-icon">MK</div>
+        <h3>Digital Marketing</h3>
+        <p class="desc">Own brand strategy, performance campaigns and analytics in a field that never stops evolving.</p>
+        <div class="chip-row">
+          <span class="tool-chip">SEO</span><span class="tool-chip">Analytics</span><span class="tool-chip">Paid Media</span><span class="tool-chip">Content</span>
+        </div>
+        <span class="track-stat">$455B global digital ad spend, 2024</span>
+      </div>
+
+      <div class="track-card reveal">
+        <div class="track-icon">GD</div>
+        <h3>Graphic Designing</h3>
+        <p class="desc">Visual communication, brand systems and design tooling that shapes how products and stories get seen.</p>
+        <div class="chip-row">
+          <span class="tool-chip">Figma</span><span class="tool-chip">Adobe CC</span><span class="tool-chip">Typography</span><span class="tool-chip">UI Systems</span>
+        </div>
+        <span class="track-stat">$50B projected market by 2026</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PIPELINE / JOURNEY ================= -->
+<section class="dark-section" id="pipeline">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow" style="color:var(--cyan-300);">The Pipeline</span>
+      <h2>From inquiry to offer letter — one continuous build.</h2>
+      <p>Every student runs through the same four stages. No shortcuts, no black box — just training, real work, and a placement push at the end.</p>
+    </div>
+
+    <div class="pipeline reveal">
+      <div class="pipeline-track" id="pipelineTrack">
+        <div class="pipeline-line" id="pipelineLine"><div class="fill"></div></div>
+
+        <div class="stage">
+          <div class="stage-node">01</div>
+          <span class="stage-tag">Stage / Inquire</span>
+          <h4>Select your module</h4>
+          <p>Talk to an advisor and pick the track and pricing module that fits your goals and timeline.</p>
+        </div>
+        <div class="stage">
+          <div class="stage-node">02</div>
+          <span class="stage-tag">Stage / Train</span>
+          <h4>3 months of training</h4>
+          <p>Hands-on learning with 75% minimum attendance, live projects, and weekly assignments with real deadlines.</p>
+        </div>
+        <div class="stage">
+          <div class="stage-node">03</div>
+          <span class="stage-tag">Stage / Intern</span>
+          <h4>3 months, paid internship</h4>
+          <p>Work with seasoned mentors on real client projects — building the portfolio that gets you hired.</p>
+        </div>
+        <div class="stage">
+          <div class="stage-node">04</div>
+          <span class="stage-tag">Stage / Deploy</span>
+          <h4>Land your first job</h4>
+          <p>Resume-ready and interview-tested. Top performers get a direct route into our hiring partner network.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STUDENT SUPPORT ================= -->
+<section class="light-section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow" style="color:#0E8F80;">Student Support</span>
+      <h2>You're never stuck waiting for an answer.</h2>
+      <p>A scalable support system means doubts get resolved same-day — not next week.</p>
+    </div>
+    <div class="support-grid">
+      <div class="support-card reveal">
+        <div class="n">4.8/5</div>
+        <h5>TA-Rated Support</h5>
+        <p>Average doubt-resolution rating from students on the platform, every single day.</p>
+      </div>
+      <div class="support-card reveal">
+        <div class="n">Live</div>
+        <h5>Real Projects</h5>
+        <p>Build industry-standard Mini, Major and Capstone projects — not toy exercises.</p>
+      </div>
+      <div class="support-card reveal">
+        <div class="n">1:1</div>
+        <h5>Live Mentorship</h5>
+        <p>Schedule mock interviews and get direct time with working industry experts.</p>
+      </div>
+      <div class="support-card reveal">
+        <div class="n">Certified</div>
+        <h5>Recognized Credential</h5>
+        <p>Earn an industry-recognized certificate on completing your bootcamp.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRICING ================= -->
+<section id="pricing" class="light-section" style="background:var(--paper-100);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow" style="color:#0E8F80;">Select Your Module</span>
+      <h2>Pricing built around outcomes, not just hours.</h2>
+      <p>Every module includes 3 months of training and a 3-month paid internship. The difference is how far we go on placement.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="price-card reveal">
+        <span class="module-tag">Module 3</span>
+        <h3>Foundation</h3>
+        <div class="price">₹59,999<span>/ one-time</span></div>
+        <div class="price-note">Inclusive of all taxes</div>
+        <ul class="price-features">
+          <li><svg class="check" viewBox="0 0 20 20" fill="none"><path d="M4 10l4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>3 months structured training</li>
+          <li><svg class="check" viewBox="0 0 20 20" fill="none"><path d="M4 10l4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>3-month paid internship</li>
+          <li><svg class="check" viewBox="0 0 20 20" fill="none"><path d="M4 10l4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Live projects & mentorship</li>
+        </ul>
+        <a href="#contact" class="btn btn-ghost on-light price-cta">Choose Module 3</a>
+      </div>
+
+      <div class="price-card featured reveal">
+        <span class="price-badge">Most Popular</span>
+        <span class="module-tag">Module 2</span>
+        <h3>Accelerator</h3>
+        <div class="price">₹99,999<span>/ one-time</span></div>
+        <div class="price-note">Inclusive of all taxes</div>
+        <ul class="price-features">
+          <li><svg class="check" viewBox="0 0 20 20" fill="none"><path d="M4 10l4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>3 months structured training</li>
+          <li><svg class="check" viewBox="0 0 20 20" fill="none"><path d="M4 10l4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>3-month paid internship</li>
+          <li><svg class="check" viewBox="0 0 20 20" fill="none"><path d="M4 10l4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>5 guaranteed interview vouchers</li>
+          <li><svg class="check" viewBox="0 0 20 20" fill="none"><path d="M4 10l4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Live projects & mentorship</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary price-cta">Choose Module 2</a>
+      </div>
+
+      <div class="price-card reveal">
+        <span class="module-tag">Module 1</span>
+        <h3>Guaranteed</h3>
+        <div class="price">₹1,49,999<span>/ one-time</span></div>
+        <div class="price-note">Inclusive of all taxes</div>
+        <ul class="price-features">
+          <li><svg class="check" viewBox="0 0 20 20" fill="none"><path d="M4 10l4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>3 months structured training</li>
+          <li><svg class="check" viewBox="0 0 20 20" fill="none"><path d="M4 10l4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>3-month paid internship</li>
+          <li><svg class="check" viewBox="0 0 20 20" fill="none"><path d="M4 10l4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><strong>Guaranteed placement</strong></li>
+          <li><svg class="check" viewBox="0 0 20 20" fill="none"><path d="M4 10l4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Live projects & mentorship</li>
+        </ul>
+        <a href="#contact" class="btn btn-ghost on-light price-cta">Choose Module 1</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHY US ================= -->
+<section id="why" class="light-section">
+  <div class="wrap why-grid">
+    <div>
+      <div class="section-head reveal" style="margin-bottom:14px;">
+        <span class="eyebrow" style="color:#0E8F80;">Why Realm Consulting</span>
+        <h2>Built like infrastructure, not a classroom.</h2>
+      </div>
+      <ul class="why-list reveal">
+        <li>
+          <span class="why-num">01</span>
+          <div><h4>Comprehensive curriculum</h4><p>Covering every layer of the tools and technologies employers actually use.</p></div>
+        </li>
+        <li>
+          <span class="why-num">02</span>
+          <div><h4>Hands-on experience</h4><p>Real-world projects and simulations, not just recorded lectures.</p></div>
+        </li>
+        <li>
+          <span class="why-num">03</span>
+          <div><h4>Placement assistance</h4><p>Dedicated support through internship placement and job readiness.</p></div>
+        </li>
+        <li>
+          <span class="why-num">04</span>
+          <div><h4>Industry expertise</h4><p>Learn from professionals with deep, current domain knowledge.</p></div>
+        </li>
+        <li>
+          <span class="why-num">05</span>
+          <div><h4>Career growth</h4><p>A direct path to career opportunities across in-demand tech roles.</p></div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="why-panel reveal">
+      <span class="eyebrow">By the numbers</span>
+      <h3>The pipeline works because the market's hiring.</h3>
+      <p>Career tracks are chosen to match where demand is growing fastest right now.</p>
+      <div class="mini-stats">
+        <div class="item"><div class="num">$25.5B</div><div class="lbl">Projected DevOps market by 2028</div></div>
+        <div class="item"><div class="num">1.7L+</div><div class="lbl">DevOps jobs open worldwide</div></div>
+        <div class="item"><div class="num">$455B</div><div class="lbl">Digital ad spend, 2024</div></div>
+        <div class="item"><div class="num">$50B</div><div class="lbl">Design market by 2026</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section class="dark-section" id="contact">
+  <div class="wrap contact-wrap">
+    <div class="contact-info">
+      <span class="eyebrow" style="color:var(--cyan-300);">Enroll Now</span>
+      <h2 style="margin-top:14px;">Let's deploy your career.</h2>
+      <p>Tell us which track you're aiming for and an advisor will walk you through modules, pricing, and start dates.</p>
+
+      <div class="contact-detail">
+        <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M21 10c0 6-9 12-9 12S3 16 3 10a9 9 0 1118 0z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.6"/></svg></div>
+        <div><div class="lbl">Address</div><div class="val">Building No. 28, Sec/Loc 2nd Stage, BTM Layout City, Bangalore South, Karnataka 560076</div></div>
+      </div>
+      <div class="contact-detail">
+        <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.7a2 2 0 01-.4 2.1L8 9.8a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.5 2.7.6a2 2 0 011.7 2z" stroke="currentColor" stroke-width="1.6"/></svg></div>
+        <div><div class="lbl">Phone</div><div class="val">+91 92010 04208</div></div>
+      </div>
+      <div class="contact-detail">
+        <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M2 7l10 6 10-6" stroke="currentColor" stroke-width="1.6"/></svg></div>
+        <div><div class="lbl">Email</div><div class="val">admissions@realmconsulting.in</div></div>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <div id="formDefault">
+        <h3>Request a callback</h3>
+        <p class="sub">We'll reach out within one business day.</p>
+        <form id="enrollForm">
+          <div class="field">
+            <label for="fname">Full name</label>
+            <input type="text" id="fname" required placeholder="Your name">
+          </div>
+          <div class="field">
+            <label for="fphone">Phone number</label>
+            <input type="tel" id="fphone" required placeholder="+91 00000 00000">
+          </div>
+          <div class="field">
+            <label for="ftrack">Career track</label>
+            <select id="ftrack">
+              <option>DevOps Engineering</option>
+              <option>AI / Machine Learning</option>
+              <option>Full Stack Development</option>
+              <option>Internet of Things</option>
+              <option>Digital Marketing</option>
+              <option>Graphic Designing</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="fmodule">Interested module</label>
+            <select id="fmodule">
+              <option>Module 1 — Guaranteed (₹1,49,999)</option>
+              <option>Module 2 — Accelerator (₹99,999)</option>
+              <option>Module 3 — Foundation (₹59,999)</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary form-submit">Request Callback</button>
+          <p class="form-note">By submitting, you agree to be contacted by Realm Consulting.</p>
+        </form>
+      </div>
+      <div class="form-success" id="formSuccess">
+        <div class="tick"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h4>Request received</h4>
+        <p>An advisor will call you within one business day to walk through your track and module.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-row">
+      <div class="foot-brand">
+        <svg width="22" height="22" viewBox="0 0 30 30" fill="none">
+          <rect x="1" y="1" width="28" height="28" rx="7" stroke="#2DD4BF" stroke-width="1.6"/>
+          <path d="M9 20V10h5.2c2.2 0 3.8 1.5 3.8 3.5S16.4 17 14.2 17H12l4 3" stroke="#2DD4BF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Realm Consulting
+      </div>
+      <div class="foot-links">
+        <a href="#tracks">Career Tracks</a>
+        <a href="#pipeline">How It Works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#why">Why Us</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+    <div class="foot-legal">$ realm-consulting --build career &amp;&amp; deploy job · Terms &amp; conditions applied</div>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav toggle
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // Terminal typing effect
+  const lines = [
+    { text: '<span class="prompt">$</span> realm-consulting --init career', pause: 400 },
+    { text: '<span class="comment">> selecting track...</span>', pause: 350 },
+    { text: '  track: devops | full-stack | ai-ml | iot', pause: 350 },
+    { text: '<span class="comment">> starting pipeline...</span>', pause: 350 },
+    { text: '  [1/4] inquire ................ <span class="ok">done</span>', pause: 250 },
+    { text: '  [2/4] train (3 months) ....... <span class="ok">done</span>', pause: 250 },
+    { text: '  [3/4] internship (paid) ...... <span class="ok">done</span>', pause: 250 },
+    { text: '  [4/4] deploy to job .......... <span class="amber">in progress</span>', pause: 500 },
+    { text: '<span class="prompt">$</span> status: <span class="ok">BUILD PASSING</span> · 100% PLACEMENT RATIO', pause: 0 }
+  ];
+  const termBody = document.getElementById('termBody');
+  let li = 0;
+
+  function typeLine(cb){
+    if(li >= lines.length){
+      const caret = document.createElement('span');
+      caret.className = 'caret';
+      termBody.appendChild(caret);
+      return;
+    }
+    const raw = lines[li].text;
+    const div = document.createElement('div');
+    termBody.appendChild(div);
+    // strip tags for char-by-char typing, then set final HTML
+    const plain = raw.replace(/<[^>]+>/g,'');
+    let i = 0;
+    const speed = 14;
+    function step(){
+      if(i <= plain.length){
+        div.textContent = plain.slice(0,i);
+        i++;
+        setTimeout(step, speed);
+      } else {
+        div.innerHTML = raw;
+        li++;
+        setTimeout(() => typeLine(cb), lines[li-1].pause);
+      }
+    }
+    step();
+  }
+  typeLine();
+
+  // Counter animation
+  const counters = document.querySelectorAll('[data-count]');
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        const el = entry.target;
+        const target = parseInt(el.getAttribute('data-count'), 10);
+        const prefix = el.getAttribute('data-prefix') || '';
+        const suffix = el.getAttribute('data-suffix') || '';
+        let cur = 0;
+        const duration = 1200;
+        const stepTime = 16;
+        const steps = duration / stepTime;
+        const inc = target / steps;
+        const timer = setInterval(() => {
+          cur += inc;
+          if(cur >= target){
+            cur = target;
+            clearInterval(timer);
+          }
+          el.textContent = prefix + Math.floor(cur) + suffix;
+        }, stepTime);
+        counterObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(c => counterObserver.observe(c));
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('in');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => revealObserver.observe(el));
+
+  // Pipeline line fill animation
+  const pipelineLine = document.getElementById('pipelineLine');
+  const pipelineObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        pipelineLine.classList.add('animate');
+        pipelineObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  pipelineObserver.observe(document.getElementById('pipelineTrack'));
+
+  // Contact form
+  const enrollForm = document.getElementById('enrollForm');
+  enrollForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    document.getElementById('formDefault').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  });
+</script>
+
+</body>
+</html>
