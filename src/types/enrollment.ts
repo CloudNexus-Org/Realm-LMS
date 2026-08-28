@@ -1,12 +1,13 @@
 export interface EnrollmentInput {
   fullName: string;
   phone: string;
-  dateOfBirth: string;
-  gender: string;
+  age: number;
+  gender: "Male" | "Female" | "Other";
   careerTrack: string;
+  interestedModule: string;
 }
 
-export interface Enrollment extends EnrollmentInput {
+export interface EnrollmentRecord extends EnrollmentInput {
   id: string;
   createdAt: Date;
   updatedAt: Date;
@@ -14,7 +15,7 @@ export interface Enrollment extends EnrollmentInput {
 
 export interface ApiResponse<T = unknown> {
   success: boolean;
-  message: string;
+  message?: string;
   data?: T;
   errors?: string[];
 }

@@ -1,10 +1,10 @@
-import { getAllEnrollments } from "@/lib/services/enrollment.service";
+import { getAllEnrollmentsService } from "@/lib/services/enrollment.service";
 import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 
 export default async function EnrollmentsPage() {
-  const enrollments = await getAllEnrollments();
+  const enrollments = await getAllEnrollmentsService();
 
   return (
     <>
@@ -27,12 +27,7 @@ export default async function EnrollmentsPage() {
           {enrollments.length === 0 ? (
             <div className="enrollments-empty">
               <div className="empty-icon">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                   <rect
                     x="3"
                     y="3"
@@ -60,9 +55,10 @@ export default async function EnrollmentsPage() {
                     <th>#</th>
                     <th>Full Name</th>
                     <th>Phone</th>
-                    <th>Date of Birth</th>
+                    <th>Age</th>
                     <th>Gender</th>
                     <th>Career Track</th>
+                    <th>Module</th>
                     <th>Submitted At</th>
                   </tr>
                 </thead>
@@ -72,18 +68,10 @@ export default async function EnrollmentsPage() {
                       <td>{index + 1}</td>
                       <td>{enrollment.fullName}</td>
                       <td>{enrollment.phone}</td>
-                      <td>
-                        {new Date(enrollment.dateOfBirth).toLocaleDateString(
-                          "en-IN",
-                          {
-                            year: "numeric",
-                            month: "short",
-                            day: "numeric",
-                          }
-                        )}
-                      </td>
+                      <td>{enrollment.age}</td>
                       <td>{enrollment.gender}</td>
                       <td>{enrollment.careerTrack}</td>
+                      <td>{enrollment.interestedModule}</td>
                       <td>
                         {new Date(enrollment.createdAt).toLocaleDateString(
                           "en-IN",

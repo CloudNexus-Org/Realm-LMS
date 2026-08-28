@@ -1,28 +1,47 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { FormEvent } from "react";
+import api from "@/lib/axios";
+import { useEnrollmentStore } from "@/store/useEnrollmentStore";
+import type { ApiResponse, EnrollmentRecord } from "@/types/enrollment";
 
-interface FormErrors {
-  fullName?: string;
-  phone?: string;
-  dateOfBirth?: string;
-  gender?: string;
-  careerTrack?: string;
-}
+const CAREER_TRACKS = [
+  "DevOps Engineering",
+  "AI / Machine Learning",
+  "Full Stack Development",
+  "Internet of Things",
+  "Digital Marketing",
+  "Graphic Designing",
+];
+
+const MODULES = [
+  "Module 1 — Guaranteed (₹1,49,999)",
+  "Module 2 — Accelerator (₹99,999)",
+  "Module 3 — Foundation (₹59,999)",
+  "Not sure yet",
+];
 
 export default function EnrollmentForm() {
-  const [fullName, setFullName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [dateOfBirth, setDateOfBirth] = useState("");
-  const [gender, setGender] = useState("");
-  const [careerTrack, setCareerTrack] = useState("DevOps Engineering");
-  const [errors, setErrors] = useState<FormErrors>({});
-  const [apiError, setApiError] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const {
+    fullName,
+    phone,
+    age,
+    gender,
+    careerTrack,
+    interestedModule,
+    errors,
+    apiError,
+    loading,
+    success,
+    setField,
+    setErrors,
+    setApiError,
+    setLoading,
+    setSuccess,
+  } = useEnrollmentStore();
 
   function validateClient(): boolean {
-    const newErrors: FormErrors = {};
+    const newErrors: typeof errors = {};
 
     if (!fullName.trim() || fullName.trim().length < 2) {
       newErrors.fullName = "Full name must be at least 2 characters";
@@ -32,15 +51,11 @@ export default function EnrollmentForm() {
       newErrors.phone = "Please enter a valid phone number";
     }
 
-    if (!dateOfBirth) {
-      newErrors.dateOfBirth = "Please enter your date of birth";
-    } else {
-      const dob = new Date(dateOfBirth);
-      const today = new Date();
-      const age = today.getFullYear() - dob.getFullYear();
-      if (age < 16 || age > 100) {
-        newErrors.dateOfBirth = "You must be between 16 and 100 years old";
-      }
+    const ageNum = parseInt(age, 10);
+    if (!age || isNaN(ageNum)) {
+      newErrors.age = "Please enter your age";
+    } else if (ageNum < 16 || ageNum > 100) {
+      newErrors.age = "You must be between 16 and 100 years old";
     }
 
     if (!gender) {
@@ -49,6 +64,10 @@ export default function EnrollmentForm() {
 
     if (!careerTrack) {
       newErrors.careerTrack = "Please select a career track";
+    }
+
+    if (!interestedModule) {
+      newErrors.interestedModule = "Please select a module";
     }
 
     setErrors(newErrors);
@@ -64,39 +83,43 @@ export default function EnrollmentForm() {
     setLoading(true);
 
     try {
-      const res = await fetch("/api/enrollments", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          fullName: fullName.trim(),
-          phone: phone.trim(),
-          dateOfBirth,
-          gender,
-          careerTrack,
-        }),
+      await api.post<ApiResponse<EnrollmentRecord>>("/api/enrollments", {
+        fullName: fullName.trim(),
+        phone: phone.trim(),
+        age: parseInt(age, 10),
+        gender,
+        careerTrack,
+        interestedModule,
       });
 
-      const data = await res.json();
-
-      if (!res.ok) {
+      // Reset fields but show success screen
+      setField("fullName", "");
+      setField("phone", "");
+      setField("age", "");
+      setField("gender", "");
+      setField("careerTrack", "DevOps Engineering");
+      setField("interestedModule", "Module 2 — Accelerator (₹99,999)");
+      setErrors({});
+      setApiError("");
+      setSuccess(true);
+    } catch (err) {
+      if (
+        err &&
+        typeof err === "object" &&
+        "response" in err &&
+        err.response &&
+        typeof err.response === "object" &&
+        "data" in err.response
+      ) {
+        const data = (err.response as { data: ApiResponse }).data;
         if (data.errors && Array.isArray(data.errors)) {
           setApiError(data.errors.join(", "));
         } else {
           setApiError(data.message || "Something went wrong");
         }
-        setLoading(false);
-        return;
+      } else {
+        setApiError("Network error. Please try again.");
       }
-
-      setSuccess(true);
-      setFullName("");
-      setPhone("");
-      setDateOfBirth("");
-      setGender("");
-      setCareerTrack("DevOps Engineering");
-      setErrors({});
-    } catch {
-      setApiError("Network error. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -109,6 +132,7 @@ export default function EnrollmentForm() {
           <h3>Request a callback</h3>
           <p className="sub">We&apos;ll reach out within one business day.</p>
           <form onSubmit={handleSubmit} noValidate>
+            {/* Full Name */}
             <div className="field">
               <label htmlFor="fname">Full name</label>
               <input
@@ -116,13 +140,15 @@ export default function EnrollmentForm() {
                 id="fname"
                 placeholder="Your name"
                 value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
+                onChange={(e) => setField("fullName", e.target.value)}
                 className={errors.fullName ? "error" : ""}
               />
               {errors.fullName && (
                 <span className="field-error">{errors.fullName}</span>
               )}
             </div>
+
+            {/* Phone */}
             <div className="field">
               <label htmlFor="fphone">Phone number</label>
               <input
@@ -130,32 +156,39 @@ export default function EnrollmentForm() {
                 id="fphone"
                 placeholder="+91 00000 00000"
                 value={phone}
-                onChange={(e) => setPhone(e.target.value)}
+                onChange={(e) => setField("phone", e.target.value)}
                 className={errors.phone ? "error" : ""}
               />
               {errors.phone && (
                 <span className="field-error">{errors.phone}</span>
               )}
             </div>
+
+            {/* Age */}
             <div className="field">
-              <label htmlFor="fdob">Date of Birth</label>
+              <label htmlFor="fage">Age</label>
               <input
-                type="date"
-                id="fdob"
-                value={dateOfBirth}
-                onChange={(e) => setDateOfBirth(e.target.value)}
-                className={errors.dateOfBirth ? "error" : ""}
+                type="number"
+                id="fage"
+                placeholder="Your age"
+                min="16"
+                max="100"
+                value={age}
+                onChange={(e) => setField("age", e.target.value)}
+                className={errors.age ? "error" : ""}
               />
-              {errors.dateOfBirth && (
-                <span className="field-error">{errors.dateOfBirth}</span>
+              {errors.age && (
+                <span className="field-error">{errors.age}</span>
               )}
             </div>
+
+            {/* Gender */}
             <div className="field">
               <label htmlFor="fgender">Gender</label>
               <select
                 id="fgender"
                 value={gender}
-                onChange={(e) => setGender(e.target.value)}
+                onChange={(e) => setField("gender", e.target.value)}
                 className={errors.gender ? "error" : ""}
               >
                 <option value="">Select gender</option>
@@ -167,20 +200,40 @@ export default function EnrollmentForm() {
                 <span className="field-error">{errors.gender}</span>
               )}
             </div>
+
+            {/* Career Track */}
             <div className="field">
               <label htmlFor="ftrack">Career track</label>
               <select
                 id="ftrack"
                 value={careerTrack}
-                onChange={(e) => setCareerTrack(e.target.value)}
+                onChange={(e) => setField("careerTrack", e.target.value)}
                 className={errors.careerTrack ? "error" : ""}
               >
-                <option>DevOps Engineering</option>
-                <option>AI / Machine Learning</option>
-                <option>Full Stack Development</option>
+                {CAREER_TRACKS.map((t) => (
+                  <option key={t}>{t}</option>
+                ))}
               </select>
               {errors.careerTrack && (
                 <span className="field-error">{errors.careerTrack}</span>
+              )}
+            </div>
+
+            {/* Interested Module */}
+            <div className="field">
+              <label htmlFor="fmodule">Interested module</label>
+              <select
+                id="fmodule"
+                value={interestedModule}
+                onChange={(e) => setField("interestedModule", e.target.value)}
+                className={errors.interestedModule ? "error" : ""}
+              >
+                {MODULES.map((m) => (
+                  <option key={m}>{m}</option>
+                ))}
+              </select>
+              {errors.interestedModule && (
+                <span className="field-error">{errors.interestedModule}</span>
               )}
             </div>
 
@@ -205,12 +258,7 @@ export default function EnrollmentForm() {
       ) : (
         <div className="form-success visible">
           <div className="tick">
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-            >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
               <path
                 d="M5 13l4 4L19 7"
                 stroke="currentColor"
@@ -222,8 +270,8 @@ export default function EnrollmentForm() {
           </div>
           <h4>Request received</h4>
           <p>
-            An advisor will call you within one business day to walk through your
-            track and module.
+            An advisor will call you within one business day to walk through
+            your track and module.
           </p>
         </div>
       )}
