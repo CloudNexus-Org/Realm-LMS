@@ -47,6 +47,10 @@ const enrollmentSchema = new Schema<IEnrollment>(
   }
 );
 
+if (process.env.NODE_ENV === "development" && mongoose.models.Enrollment) {
+  delete (mongoose.models as Record<string, unknown>).Enrollment;
+}
+
 const Enrollment: Model<IEnrollment> =
   mongoose.models.Enrollment ||
   mongoose.model<IEnrollment>("Enrollment", enrollmentSchema);
