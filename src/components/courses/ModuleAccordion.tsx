@@ -5,9 +5,13 @@ import { CourseModule } from "@/types/course";
 
 interface ModuleAccordionProps {
   modules: CourseModule[];
+  onSelectVideo?: (module: CourseModule, videoIndex: number) => void;
 }
 
-export default function ModuleAccordion({ modules }: ModuleAccordionProps) {
+export default function ModuleAccordion({
+  modules,
+  onSelectVideo,
+}: ModuleAccordionProps) {
   // Map of open module IDs
   const [openModules, setOpenModules] = useState<Record<string, boolean>>(() => {
     const initial: Record<string, boolean> = {};
@@ -93,13 +97,24 @@ export default function ModuleAccordion({ modules }: ModuleAccordionProps) {
                 {/* 3-dots Dropdown Menu */}
                 {isMenuOpen && (
                   <div className="module-dropdown-menu">
+                    <button
+                      type="button"
+                      className="dropdown-item"
+                      onClick={() => onSelectVideo?.(module, 0)}
+                    >
+                      <span>▶</span> Play Video Lessons
+                    </button>
                     <button type="button" className="dropdown-item">
                       <span>✎</span> Edit
                     </button>
                     <button type="button" className="dropdown-item">
                       <span>⚙</span> Settings
                     </button>
-                    <button type="button" className="dropdown-item">
+                    <button
+                      type="button"
+                      className="dropdown-item"
+                      onClick={() => onSelectVideo?.(module, 0)}
+                    >
                       <span>👁</span> Preview
                     </button>
                     <button type="button" className="dropdown-item">
@@ -128,12 +143,21 @@ export default function ModuleAccordion({ modules }: ModuleAccordionProps) {
                   <div className="module-included-wrap">
                     <span className="module-included-title">What&apos;s included</span>
                     <div className="module-chips-row">
-                      <span className="module-item-chip">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <button
+                        type="button"
+                        className="module-item-chip interactive-video-chip"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onSelectVideo?.(module, 0);
+                        }}
+                        title="Click to open Video Player & Playlist"
+                      >
+                        <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="1">
                           <polygon points="5 3 19 12 5 21 5 3"></polygon>
                         </svg>
-                        {module.videosCount} videos
-                      </span>
+                        <span>{module.videosCount} videos</span>
+                        <span className="chip-play-hint">▶ Watch</span>
+                      </button>
                       <span className="module-item-chip">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>

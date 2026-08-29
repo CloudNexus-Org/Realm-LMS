@@ -360,7 +360,7 @@ section{ padding:100px 0; }
   margin-top:20px;
 }
 .pipeline-track{
-  display:grid; grid-template-columns:repeat(4,1fr); gap:0;
+  display:grid; grid-template-columns:repeat(3,1fr); gap:0;
   position:relative;
 }
 .pipeline-line{
