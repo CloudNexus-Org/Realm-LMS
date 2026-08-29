@@ -7,10 +7,9 @@ const lines = [
   { text: '<span class="comment">&gt; selecting track...</span>', pause: 350 },
   { text: "  track: devops | full-stack | ai-ml | iot", pause: 350 },
   { text: '<span class="comment">&gt; starting pipeline...</span>', pause: 350 },
-  { text: '  [1/4] inquire ................ <span class="ok">done</span>', pause: 250 },
-  { text: '  [2/4] train (3 months) ....... <span class="ok">done</span>', pause: 250 },
-  { text: '  [3/4] internship (paid) ...... <span class="ok">done</span>', pause: 250 },
-  { text: '  [4/4] deploy to job .......... <span class="amber">in progress</span>', pause: 500 },
+  { text: '  [1/3] inquire ................ <span class="ok">done</span>', pause: 250 },
+  { text: '  [2/3] train (3 months) ....... <span class="ok">done</span>', pause: 250 },
+  { text: '  [3/3] deploy to job .......... <span class="amber">in progress</span>', pause: 500 },
   { text: '<span class="prompt">$</span> status: <span class="ok">BUILD PASSING</span> · 100% PLACEMENT RATIO', pause: 0 },
 ];
 

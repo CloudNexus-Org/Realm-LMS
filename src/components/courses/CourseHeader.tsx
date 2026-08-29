@@ -1,11 +1,14 @@
-import Link from "next/link";
 import { Course } from "@/types/course";
 
 interface CourseHeaderProps {
   course: Course;
+  onPreviewVideo?: () => void;
 }
 
-export default function CourseHeader({ course }: CourseHeaderProps) {
+export default function CourseHeader({
+  course,
+  onPreviewVideo,
+}: CourseHeaderProps) {
   return (
     <div className="outline-topbar">
       <div className="outline-title-wrap">
@@ -39,13 +42,14 @@ export default function CourseHeader({ course }: CourseHeaderProps) {
           Deep Feed
         </button>
 
-        <Link
-          href={`/courses/${course.slug}`}
+        <button
+          type="button"
           className="btn-preview-cta"
           id="course-preview-btn"
+          onClick={() => onPreviewVideo?.()}
         >
-          Preview
-        </Link>
+          <span>▶ Preview Video</span>
+        </button>
       </div>
     </div>
   );

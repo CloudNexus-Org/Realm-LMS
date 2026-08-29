@@ -23,7 +23,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Realm Consulting — Deploy Your Career Into Tech",
   description:
-    "We train future DevOps Engineers, SDEs, and Data Engineers with live projects, real mentors, and a paid internship pipeline built to ship you straight into your first tech job.",
+    "We train future DevOps Engineers, SDEs, and Data Engineers with live projects, real mentors, and guaranteed placement built to ship you straight into your first tech job.",
 };
 
 import HeaderFooterWrapper from "@/components/layout/HeaderFooterWrapper";

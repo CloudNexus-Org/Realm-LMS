@@ -14,8 +14,8 @@ export default function Hero() {
           </h1>
           <p className="lede">
             We train future DevOps Engineers, SDEs, and Data Engineers with live
-            projects, real mentors, and a paid internship pipeline built to ship
-            you straight into your first tech job.
+            projects, real mentors, and guaranteed placement built to ship you
+            straight into your first tech job.
           </p>
           <div className="hero-ctas">
             <a href="#pricing" className="btn btn-primary">

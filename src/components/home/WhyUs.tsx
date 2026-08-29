@@ -12,7 +12,7 @@ const reasons = [
   {
     num: "03",
     title: "Placement assistance",
-    desc: "Dedicated support through internship placement and job readiness.",
+    desc: "Dedicated support through guaranteed placement and job readiness.",
   },
   {
     num: "04",

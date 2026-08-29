@@ -1,9 +1,7 @@
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import type { Metadata } from "next";
 import { getCourseBySlug, getAllCourses } from "@/data/courses";
-import CoursePreviewCard from "@/components/courses/CoursePreviewCard";
-import CourseInfoTabs from "@/components/courses/CourseInfoTabs";
+import CourseDetailDashboard from "@/components/courses/CourseDetailDashboard";
 
 interface CourseOverviewPageProps {
   params: Promise<{ slug: string }>;
@@ -24,12 +22,12 @@ export async function generateMetadata({
 
   if (!course) {
     return {
-      title: "Course Overview | Realm Consulting",
+      title: "Course Detail | Realm Consulting",
     };
   }
 
   return {
-    title: `${course.shortTitle} — Overview | Realm Consulting`,
+    title: `${course.shortTitle} — Course Detail | Realm Consulting`,
     description: course.description,
   };
 }
@@ -44,41 +42,6 @@ export default async function CourseOverviewPage({
     notFound();
   }
 
-  return (
-    <div className="preview-modal-wrapper">
-      {/* Modal Top Header */}
-      <div className="preview-modal-header">
-        <h1 className="preview-modal-title">Preview Course</h1>
-        <Link
-          href="/"
-          className="preview-close-btn"
-          aria-label="Close preview"
-          title="Back to Home"
-        >
-          <svg
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </Link>
-      </div>
-
-      {/* Two Column Layout Matching Reference Image 1 */}
-      <div className="preview-two-columns-layout">
-        {/* Left Column: Preview card, Price, CTA, Instructor, Course Detail, Tools */}
-        <CoursePreviewCard course={course} />
-
-        {/* Right Column: Title/Category, Tabs, What'll you learn, Certificate Section */}
-        <CourseInfoTabs course={course} />
-      </div>
-    </div>
-  );
+  return <CourseDetailDashboard course={course} />;
 }
+
