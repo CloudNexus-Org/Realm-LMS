@@ -1,70 +1,61 @@
-# Realm Consulting — Next.js Full-Stack Application
+# Realm Consulting — Next.js Full-Stack LMS Platform
 
-A production-ready Next.js monolithic application that serves both the frontend and backend. Built with the App Router, TypeScript, Prisma ORM, and PostgreSQL.
+A modern, production-ready full-stack learning platform and career bootcamp management system built with Next.js 16 (App Router), TypeScript, MongoDB & Mongoose, Zustand, and standalone Docker deployment.
 
-## Architecture
+## Architecture Overview
 
 ```
-Browser
+Browser / Client
   ↓
-Next.js Application (single container)
-├── React Server Components (static sections)
-├── React Client Components (animations, form)
-├── Server-side rendering
-├── API Route Handlers (POST/GET /api/enrollments)
-├── Zod validation
-├── Enrollment service layer
-└── Prisma ORM
-  ↓
-PostgreSQL (external)
+Next.js Application (Standalone Container)
+├── React Server Components (landing page, metadata, static pages)
+├── React Client Components (interactive curriculum dashboard, video player, enrollment form)
+├── Course Dashboard & Syllabus Engine (/courses/[slug], /courses/[slug]/outline)
+├── API Route Handlers (/api/enrollments)
+├── Controller & Service Layer (MVC Pattern)
+├── Mongoose ODM & MongoDB Atlas
+└── Standalone Node.js Runner (~74MB optimized image)
 ```
+
+## Tech Stack
+
+- **Framework**: Next.js 16 (App Router, Turbopack, Standalone Output)
+- **Frontend**: React 19, TypeScript, Vanilla CSS Design System
+- **State Management**: Zustand
+- **Backend**: Next.js Route Handlers + Controller/Service/Repository Layer
+- **Database**: MongoDB & Mongoose
+- **Validation**: Zod
+- **Containerization**: Docker (multi-stage standalone build) & Docker Compose
 
 ## Requirements
 
 - Node.js 20+
 - npm 9+
-- PostgreSQL 14+
-- Docker (optional, for containerized deployment)
+- MongoDB instance or MongoDB Atlas cluster
+- Docker (optional, for containerized run)
 
-## Local Installation
+## Local Development
 
-```bash
-npm install
-```
+1. **Install Dependencies**:
+   ```bash
+   npm install
+   ```
 
-## Environment Setup
+2. **Configure Environment Variables**:
+   Copy `.env.example` to `.env.local` or `.env`:
+   ```bash
+   cp .env.example .env.local
+   ```
+   Set your MongoDB connection string:
+   ```env
+   MONGODB_URI="mongodb+srv://<username>:<password>@<cluster>.mongodb.net/realm-consulting?retryWrites=true&w=majority"
+   ```
 
-```bash
-cp .env.example .env
-```
-
-Edit `.env` and set your PostgreSQL connection string:
-
-```
-DATABASE_URL="postgresql://username:password@localhost:5432/realm_consulting"
-```
-
-## Database Setup
-
-Generate Prisma client:
-
-```bash
-npx prisma generate
-```
-
-Run migrations (creates the database tables):
-
-```bash
-npx prisma migrate dev --name init
-```
-
-## Development
-
-```bash
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000).
+3. **Start the Development Server**:
+   ```bash
+   npm run dev
+   ```
+   Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Production Build
 
@@ -73,182 +64,69 @@ npm run build
 npm start
 ```
 
-## Docker
+## Docker Deployment
 
-### Build the image
-
+### Build Image
 ```bash
-docker build -t realm-consulting .
+docker build -t realm-lms:latest .
 ```
 
-### Run with external PostgreSQL
-
+### Run Container
 ```bash
-docker run -p 3000:3000 -e DATABASE_URL="postgresql://user:pass@host:5432/realm_consulting" realm-consulting
+docker run -d -p 3000:3000 --env-file .env realm-lms:latest
 ```
 
-### Run with Docker Compose (includes PostgreSQL)
-
+### Run with Docker Compose
 ```bash
-docker-compose up -d
-```
-
-Then run migrations against the containerized database:
-
-```bash
-npx prisma migrate deploy
+docker compose up -d
 ```
 
 ## Project Structure
 
 ```
 src/
-  app/
-    layout.tsx              Root layout (fonts, navbar, footer)
-    page.tsx                Home page (composes all sections)
-    globals.css             All styling (extracted from original HTML)
-    enrollments/
-      page.tsx              Server-side enrollment records page
-    tracks/
-      devops-engineering/
-        page.tsx            DevOps track detail page (blank)
-      ai-machine-learning/
-        page.tsx            AI/ML track detail page (blank)
-      full-stack-development/
-        page.tsx            Full Stack track detail page (blank)
-    api/
-      enrollments/
-        route.ts            REST API (POST + GET)
-  components/
-    layout/
-      Navbar.tsx            Fixed nav with blur (Server Component)
-      NavToggle.tsx         Mobile menu toggle (Client Component)
-      Footer.tsx            Site footer (Server Component)
-    home/
-      Hero.tsx              Hero section (Server Component)
-      TerminalAnimation.tsx Terminal typing effect (Client Component)
-      AnimatedCounters.tsx  Stat counters (Client Component)
-      TrustedCompanies.tsx  Company logos (Server Component)
-      CareerTracks.tsx      3 clickable track cards (Server Component)
-      CareerPipeline.tsx    Pipeline section (Server Component)
-      PipelineAnimation.tsx Pipeline line fill (Client Component)
-      StudentSupport.tsx    Support cards (Server Component)
-      Pricing.tsx           Single Foundation module (Server Component)
-      WhyUs.tsx             Why Us section (Server Component)
-      ContactSection.tsx    Contact info + form (Server Component)
-      ScrollReveal.tsx      Scroll animations (Client Component)
-    enrollment/
-      EnrollmentForm.tsx    Form with validation (Client Component)
-  lib/
-    prisma.ts               Prisma singleton
-    services/
-      enrollment.service.ts Business logic
-    validations/
-      enrollment.ts         Zod schemas
-  types/
-    enrollment.ts           TypeScript interfaces
-prisma/
-  schema.prisma             Database schema
+├── app/
+│   ├── api/enrollments/        # REST API endpoint (POST, GET)
+│   ├── courses/[slug]/         # Dynamic course dashboard (/courses/devops, etc.)
+│   │   ├── enroll/             # Course enrollment flow
+│   │   └── outline/            # Comprehensive course syllabus & modules
+│   ├── enrollments/            # Admin dashboard viewing submitted enrollments
+│   ├── globals.css             # Main design system & token definitions
+│   ├── layout.tsx              # Root HTML layout & fonts (Space Grotesk, Inter, JetBrains Mono)
+│   └── page.tsx                # High-converting landing page
+├── components/
+│   ├── courses/                # Course dashboard, outline accordion, video player, tabs
+│   ├── enrollment/             # Interactive validation & callback enrollment form
+│   ├── home/                   # Hero, tracks, pipeline, pricing, animations
+│   └── layout/                 # Sticky blur navbar, navigation toggles, footer
+├── controllers/                # Request validation & HTTP response formatting
+├── data/                       # Rich static course syllabi & curriculum content
+├── lib/
+│   ├── axios.ts                # Configured Axios HTTP client
+│   ├── mongodb.ts              # Cached Mongoose connection helper
+│   ├── services/               # Business logic services
+│   └── validations/            # Zod validation schemas
+├── models/                     # Mongoose document schemas & models
+├── repositories/               # Data access layer
+├── store/                      # Zustand client-side form state
+├── styles/                     # Scoped module styling
+└── types/                      # TypeScript definitions (Course, Enrollment, API)
 ```
 
 ## Career Tracks
 
-The application features 3 career tracks:
+1. **DevOps Engineering** (`/courses/devops`) — Linux, AWS, Azure, Docker, Kubernetes, GitOps, Terraform, Security & GenAI
+2. **AI / Machine Learning** (`/courses/ai-ml`) — Python, Statistics, Deep Learning, NLP, CV, GenAI & MLOps
+3. **Full Stack Development** (`/courses/development`) — Core Java, Streams, Spring Boot Microservices, SQL, Docker & JWT
 
-1. **DevOps Engineering** — Docker, Kubernetes, Jenkins, AWS, Terraform
-2. **AI / Machine Learning** — Python, TensorFlow, scikit-learn, Pandas, OpenCV
-3. **Full Stack Development** — React, Node.js, Spring Boot, MySQL, Kafka
+## API Reference
 
-Each track card links to a dedicated detail page at `/tracks/[slug]` (currently blank placeholder pages for future content).
+### `POST /api/enrollments`
+Creates a new enrollment callback request.
+- **Body**: `{ fullName, phone, dateOfBirth, gender, careerTrack }`
+- **Validation**: Zod schema verification
+- **Response**: `201 Created` with created enrollment record.
 
-## Pricing
-
-Single module: **Foundation** at ₹1,49,999 (one-time) including:
-- 3 months structured training
-- Guaranteed placement
-- Live projects & mentorship
-
-## Enrollment Form Fields
-
-| Field | Type | Options |
-|-------|------|---------|
-| Full Name | text | — |
-| Phone | tel | — |
-| Date of Birth | date | — |
-| Gender | select | Male, Female, Other |
-| Career Track | select | DevOps Engineering, AI/ML, Full Stack Development |
-
-## Database Schema
-
-```prisma
-model Enrollment {
-  id          String   @id @default(cuid())
-  fullName    String
-  phone       String
-  dateOfBirth String
-  gender      String
-  careerTrack String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-}
-```
-
-## Client vs Server Components
-
-**Server Components** (default, no browser JS):
-- Navbar, Footer, Hero, TrustedCompanies, CareerTracks, CareerPipeline, StudentSupport, Pricing, WhyUs, ContactSection, EnrollmentsPage, Track detail pages
-
-**Client Components** (`"use client"`, shipped to browser):
-- NavToggle (hamburger menu state)
-- TerminalAnimation (typing effect with setTimeout)
-- AnimatedCounters (IntersectionObserver + counter animation)
-- PipelineAnimation (IntersectionObserver + CSS class toggle)
-- ScrollReveal (IntersectionObserver for all `.reveal` elements)
-- EnrollmentForm (form state, validation, fetch, loading/success)
-
-## API Endpoints
-
-### POST /api/enrollments
-
-Creates a new enrollment request.
-
-**Request:**
-```json
-{
-  "fullName": "Rahul Sharma",
-  "phone": "+919876543210",
-  "dateOfBirth": "2000-05-15",
-  "gender": "Male",
-  "careerTrack": "DevOps Engineering"
-}
-```
-
-**Success (201):**
-```json
-{
-  "success": true,
-  "message": "Enrollment request created successfully",
-  "data": { "id": "...", ... }
-}
-```
-
-**Validation Error (400):**
-```json
-{
-  "success": false,
-  "message": "Validation failed",
-  "errors": ["fullName: Full name must be at least 2 characters"]
-}
-```
-
-### GET /api/enrollments
-
-Returns all enrollment records ordered newest first.
-
-**Success (200):**
-```json
-{
-  "success": true,
-  "data": [...]
-}
-```
+### `GET /api/enrollments`
+Fetches all enrollment records, sorted by creation date (newest first).
+- **Response**: `200 OK` with enrollment array.
