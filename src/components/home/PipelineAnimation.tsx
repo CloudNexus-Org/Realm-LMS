@@ -57,15 +57,6 @@ export default function PipelineAnimation() {
         </div>
         <div className="stage">
           <div className="stage-node">03</div>
-          <span className="stage-tag">Stage / Intern</span>
-          <h4>3 months, paid internship</h4>
-          <p>
-            Work with seasoned mentors on real client projects — building the
-            portfolio that gets you hired.
-          </p>
-        </div>
-        <div className="stage">
-          <div className="stage-node">04</div>
           <span className="stage-tag">Stage / Deploy</span>
           <h4>Land your first job</h4>
           <p>

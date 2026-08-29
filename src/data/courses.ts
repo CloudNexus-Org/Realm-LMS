@@ -1,622 +1,513 @@
-import { Course } from "@/types/course";
+import type { Course } from "@/types/course";
 
-export const courses: Record<string, Course> = {
-  development: {
-    slug: "development",
-    title: "Java Backend & Full Stack Development: From Core Java to Spring Boot Microservices",
-    shortTitle: "Full Stack & Java Backend",
-    category: "Enterprise Software Engineering",
-    subtitle: "19-Module Progressive Roadmap: Core Java, OOP, Concurrency, SQL, Spring Boot, JPA, Security, Testing & Capstone",
+export interface CourseModule {
+  title: string;
+  topics: string[];
+}
+
+export interface CourseReview {
+  name: string;
+  role: string;
+  rating: number;
+  text: string;
+}
+
+export interface CourseInstructor {
+  name: string;
+  role: string;
+  badge: string;
+  bio: string;
+}
+
+export interface CourseData {
+  slug: string;
+  category: string;
+  title: string;
+  description: string;
+  price: string;
+  originalPrice: string;
+  duration: string;
+  modules: CourseModule[];
+  resources: string[];
+  instructor: CourseInstructor;
+  reviews: CourseReview[];
+}
+
+export const courses: Record<string, CourseData> = {
+  "devops-engineering": {
+    slug: "devops-engineering",
+    category: "Cloud & Platform Infrastructure",
+    title: "DevOps Engineering Program: From Foundations to GenAI & Platform Ops",
     description:
-      "A structured, industry-oriented Java backend and full stack program covering Core Java, modern Java Streams, databases, Spring Boot, REST APIs, persistence, security, testing, logging, architecture, and a production-grade Capstone project.",
-    fullDescription: [
-      "This comprehensive Java Backend Development course is engineered to take you from core programming primitives to architecting scalable enterprise systems with Spring Boot and relational databases.",
-      "Across 19 structured modules, 19 knowledge check quizzes, and 5 progressive practical application labs, you will build clean, object-oriented, test-driven Java applications culminating in an enterprise-style Spring Boot Capstone backend with JWT security, JPA persistence, and OpenAPI documentation.",
-    ],
-    coverImage:
-      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80",
-    previewVideoImage:
-      "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80",
-    price: 149999,
-    originalPrice: 199999,
-    level: "Advanced",
-    totalModules: 19,
-    totalActivities: 65,
-    totalCourses: 65,
-    totalAssignments: 25,
-    totalQuizzes: 19,
-    rating: 4.92,
-    reviewsCount: "5.7k Reviews",
-    lastUpdated: "Current Cohort (19 Modules / 5 Practical Labs)",
-    instructor: {
-      name: "Dr. Daniel Scott",
-      title: "Senior Java Architect & Backend Lead",
-      email: "daniel.scott@lms.com",
-      avatar:
-        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&h=200&q=80",
-      badge: "Top Instructor",
-      bio: "Dr. Daniel Scott is a seasoned enterprise software engineer and educator with 12+ years building high-throughput distributed systems in Java, Spring, and relational database architectures.",
-      profileLink: "#",
-    },
+      "Our DevOps Engineering Training Program follows a proven pedagogical logic: Foundation before abstraction (Linux, shell scripting, networking, and Git first), one cloud deep before two clouds broad (AWS taught to working depth before Azure), never learn a tool in isolation (paired with hands-on daily assignments), automate what you first did by hand (manual cloud/k8s precedes Terraform/Helm/ArgoCD), and GenAI comes last on purpose (AI tooling introduced after understanding infrastructure, logs, and common failure patterns).",
+    price: "₹1,49,999",
+    originalPrice: "₹1,99,999",
+    duration: "3 months",
     modules: [
       {
-        id: "dev-m1",
-        number: "01",
-        title: "Java Fundamentals",
-        description:
-          "Java ecosystem, JDK/JRE/JVM setup, syntax, datatypes, operators, control flow (conditions & loops), methods, recursion, arrays, and string handling. Practical: Build a console-based utility application. Quiz: Module 1 Knowledge Check.",
-        videosCount: 4,
-        readingsCount: 3,
-        assignmentsCount: 2,
-        quizCount: 1,
-        isExpandedByDefault: true,
+        title: "Linux & Networking Fundamentals",
+        topics: [
+          "Linux file system, permissions, and process management",
+          "Shell scripting (Bash) for automation",
+          "TCP/IP, DNS, HTTP, and networking troubleshooting",
+          "SSH, firewalls, and security basics",
+        ],
       },
       {
-        id: "dev-m2",
-        number: "02",
-        title: "Object-Oriented Programming",
-        description:
-          "Classes & objects, constructors, this, static, encapsulation, access modifiers, inheritance & method overriding, polymorphism, abstraction & interfaces, composition vs. inheritance. Practical: Design a modular object-oriented application. Quiz: Module 2 Knowledge Check.",
-        videosCount: 4,
-        readingsCount: 3,
-        assignmentsCount: 2,
-        quizCount: 1,
+        title: "Version Control & Collaboration",
+        topics: [
+          "Git internals — branching, merging, rebasing",
+          "GitHub/GitLab workflows and pull request strategies",
+          "Monorepo vs polyrepo patterns",
+          "Git hooks and automated code quality checks",
+        ],
       },
       {
-        id: "dev-m3",
-        number: "03",
-        title: "Exception Handling & Clean Java",
-        description:
-          "Checked vs. unchecked exceptions, try/catch/finally, multi-catch, throw, throws, custom business exceptions, packages, immutability, and defensive programming. Practical: Implement robust validation and custom error handling. Quiz: Module 3 Knowledge Check.",
-        videosCount: 3,
-        readingsCount: 3,
-        assignmentsCount: 2,
-        quizCount: 1,
+        title: "Cloud Infrastructure (AWS Deep Dive)",
+        topics: [
+          "EC2, VPC, IAM, S3, and RDS from scratch",
+          "Load balancing, auto-scaling, and high availability",
+          "CloudWatch monitoring and alerting",
+          "Cost optimization and resource tagging",
+        ],
       },
       {
-        id: "dev-m4",
-        number: "04",
-        title: "Collections Framework (• Practical Tab 1: Core Java Application Lab)",
-        description:
-          "Collection hierarchy, Generics, List (ArrayList, LinkedList), Set (HashSet, TreeSet), Map (HashMap, TreeMap), Queue & Deque, Comparable/Comparator, equals() & hashCode(). Practical: Build a collection-based management system. Lab: Core Java Application Lab combining Modules 1–4.",
-        videosCount: 5,
-        readingsCount: 4,
-        assignmentsCount: 3,
-        quizCount: 1,
+        title: "Containers & Orchestration",
+        topics: [
+          "Docker — images, containers, multi-stage builds",
+          "Docker Compose for local development",
+          "Kubernetes architecture — pods, services, deployments",
+          "Helm charts and Kubernetes operators",
+        ],
       },
       {
-        id: "dev-m5",
-        number: "05",
-        title: "Modern Java: Lambdas, Streams & Date/Time API",
-        description:
-          "Functional interfaces, lambda expressions, method references, Stream API (intermediate & terminal operations), Optional, and modern java.time Date & Time API. Practical: Process and transform business datasets using functional Streams. Quiz: Module 5 Knowledge Check.",
-        videosCount: 4,
-        readingsCount: 3,
-        assignmentsCount: 2,
-        quizCount: 1,
+        title: "CI/CD Pipelines",
+        topics: [
+          "Jenkins pipelines — declarative and scripted",
+          "GitHub Actions for automated testing and deployment",
+          "ArgoCD and GitOps-based continuous delivery",
+          "Blue-green and canary deployment strategies",
+        ],
       },
       {
-        id: "dev-m6",
-        number: "06",
-        title: "Generics, I/O & Serialization",
-        description:
-          "Generic classes and methods, wildcards & bounded types, file & directory operations, byte vs. character streams, buffered I/O, serialization concepts, and safe alternatives. Practical: Build a file-based data processor. Quiz: Module 6 Knowledge Check.",
-        videosCount: 4,
-        readingsCount: 3,
-        assignmentsCount: 2,
-        quizCount: 1,
-      },
-      {
-        id: "dev-m7",
-        number: "07",
-        title: "Multithreading & Concurrency",
-        description:
-          "Processes vs. threads, thread lifecycle, Runnable vs. Callable, synchronization and locks, ExecutorService thread pools, Future & CompletableFuture, concurrent collections, race conditions & deadlocks. Practical: Implement a high-performance concurrent processing engine.",
-        videosCount: 5,
-        readingsCount: 4,
-        assignmentsCount: 3,
-        quizCount: 1,
-      },
-      {
-        id: "dev-m8",
-        number: "08",
-        title: "SQL & Relational Databases (• Practical Tab 2: Processing & DB Design Lab)",
-        description:
-          "Relational database concepts, tables, primary/foreign keys, constraints, CRUD queries, SELECT filtering & sorting, SQL Joins, GROUP BY & aggregate functions, subqueries, ACID transactions, indexes, and normalization. Lab: Java Processing & Database Design Lab.",
-        videosCount: 5,
-        readingsCount: 4,
-        assignmentsCount: 3,
-        quizCount: 1,
-      },
-      {
-        id: "dev-m9",
-        number: "09",
-        title: "JDBC & Data Access Objects (DAO)",
-        description:
-          "JDBC architecture & drivers, Connection, Statement and PreparedStatement, ResultSet mapping, database transactions and rollback, batch operations, connection management, and the DAO pattern. Practical: Create a Java database application using pure JDBC. Quiz: Module 9.",
-        videosCount: 4,
-        readingsCount: 3,
-        assignmentsCount: 2,
-        quizCount: 1,
-      },
-      {
-        id: "dev-m10",
-        number: "10",
-        title: "Build Tools & Backend Project Structure (Maven)",
-        description:
-          "Maven fundamentals, pom.xml dependency management, build lifecycle, plugins, profiles, standard enterprise project/package hierarchy, and environment-specific configuration. Practical: Structure a clean Maven multi-module backend project.",
-        videosCount: 3,
-        readingsCount: 3,
-        assignmentsCount: 2,
-        quizCount: 1,
-      },
-      {
-        id: "dev-m11",
-        number: "11",
-        title: "Spring Framework Fundamentals",
-        description:
-          "Inversion of Control (IoC), Dependency Injection (DI), Spring Beans and component scanning, bean scopes and lifecycle callbacks, configuration profiles, stereotype annotations (@Service, @Repository, @Component), and layered backend architecture.",
-        videosCount: 4,
-        readingsCount: 4,
-        assignmentsCount: 2,
-        quizCount: 1,
-      },
-      {
-        id: "dev-m12",
-        number: "12",
-        title: "Spring Boot (• Practical Tab 3: JDBC to Spring Boot Foundation Lab)",
-        description:
-          "Spring Boot fundamentals, Spring Initializr project setup, auto-configuration, externalized application properties/YAML profiles, configuration properties classes, Spring Boot Actuator health monitoring. Lab: JDBC to Spring Boot Foundation Lab.",
-        videosCount: 5,
-        readingsCount: 4,
-        assignmentsCount: 3,
-        quizCount: 1,
-      },
-      {
-        id: "dev-m13",
-        number: "13",
-        title: "REST API Development with Spring Web",
-        description:
-          "HTTP fundamentals & REST principles, @RestController endpoints, request parameters & path variables, request/response bodies, DTOs & Jakarta validation (@Valid), HTTP status codes, @ControllerAdvice global exception handling, and OpenAPI/Swagger documentation.",
-        videosCount: 5,
-        readingsCount: 4,
-        assignmentsCount: 3,
-        quizCount: 1,
-      },
-      {
-        id: "dev-m14",
-        number: "14",
-        title: "JPA & Hibernate ORM",
-        description:
-          "Object-Relational Mapping (ORM) concepts, JPA architecture, @Entity, @Table, @Id mapping, entity relationships (@OneToOne, @OneToMany, @ManyToMany), lazy vs. eager fetch types, JPQL queries, transactions, pagination, and sorting. Practical: Persist a real domain model.",
-        videosCount: 5,
-        readingsCount: 4,
-        assignmentsCount: 3,
-        quizCount: 1,
-      },
-      {
-        id: "dev-m15",
-        number: "15",
-        title: "Spring Data JPA & Database Design",
-        description:
-          "Repository abstraction (JpaRepository), derived query methods, @Query custom JPQL/native queries, JPA Specifications & dynamic filtering, entity auditing (@CreatedDate), database migration concepts (Flyway/Liquibase), entity design considerations, and N+1 query problem solutions.",
-        videosCount: 5,
-        readingsCount: 4,
-        assignmentsCount: 3,
-        quizCount: 1,
-      },
-      {
-        id: "dev-m16",
-        number: "16",
-        title: "Spring Security & JWT (• Practical Tab 4: Secure REST API Lab)",
-        description:
-          "Authentication vs. authorization, Spring Security filter chain architecture, BCrypt password hashing, user & role-based access control (RBAC), stateless JWT token authentication flow, securing REST endpoints, and method-level security (@PreAuthorize). Lab: Secure REST API Lab.",
-        videosCount: 5,
-        readingsCount: 4,
-        assignmentsCount: 3,
-        quizCount: 1,
-      },
-      {
-        id: "dev-m17",
-        number: "17",
-        title: "Testing & Quality: JUnit & Mockito",
-        description:
-          "Unit testing concepts, JUnit 5 assertions, parameterized tests & test lifecycle, Mockito mocking framework (@Mock, @InjectMocks, when/then), service-layer unit testing, repository integration tests with @DataJpaTest, and full-context Spring Boot tests with MockMvc.",
-        videosCount: 4,
-        readingsCount: 4,
-        assignmentsCount: 3,
-        quizCount: 1,
-      },
-      {
-        id: "dev-m18",
-        number: "18",
-        title: "Logging, Error Handling & Production-Ready Backend Practices",
-        description:
-          "Logging fundamentals with SLF4J and Logback, structured application logging, centralized exception handling, consistent error responses, configuration and secrets management, API versioning strategies, and backend performance/maintainability practices.",
-        videosCount: 4,
-        readingsCount: 3,
-        assignmentsCount: 2,
-        quizCount: 1,
-      },
-      {
-        id: "dev-m19",
-        number: "19",
-        title: "Backend Architecture & Capstone Project (• Practical Tab 5: Production-Ready Capstone Lab)",
-        description:
-          "Enterprise layered architecture (Controller, Service, Repository, DTO), separation of concerns, dependency management, API design, code reviews, and refactoring. Final Capstone: Build, test, secure, document, and present a complete production-grade Java Spring Boot backend application.",
-        videosCount: 6,
-        readingsCount: 5,
-        assignmentsCount: 4,
-        quizCount: 1,
+        title: "Infrastructure as Code & GenAI Ops",
+        topics: [
+          "Terraform — modules, state management, workspaces",
+          "Ansible for configuration management",
+          "AI-powered log analysis and incident response",
+          "Platform engineering patterns and developer experience",
+        ],
       },
     ],
-    learningOutcomes: [
-      "Master Java fundamentals, OOP, memory management, and defensive coding principles",
-      "Harness modern functional Java with Lambdas, Streams, and the Date/Time API",
-      "Write multi-threaded, asynchronous concurrent Java applications using ExecutorService and CompletableFuture",
-      "Design normalized relational databases and execute optimized SQL queries and JDBC operations",
-      "Build production-ready Spring Boot microservices with layered Controller-Service-Repository architecture",
-      "Persist complex relational domain models using Hibernate, JPA, and Spring Data JPA repositories",
-      "Secure backend APIs with Spring Security, BCrypt password hashing, and stateless JWT tokens",
-      "Implement comprehensive automated test suites using JUnit 5, Mockito, and Spring Boot MockMvc",
-      "Deliver a complete, production-ready enterprise Java Spring Boot backend Capstone Project",
+    resources: [
+      "Full lifetime access to video lectures, slides, and architectural blueprints",
+      "GitHub starter repositories and production-ready starter templates",
+      "Interactive mock interview questions and solution guides",
+      "Private Slack / Discord community for TA support & live doubt solving",
+      "Certificate of completion recognized by hiring partners",
     ],
-    tools: [
-      "Java 21",
-      "Spring Boot",
-      "Spring Data JPA",
-      "Hibernate",
-      "Spring Security",
-      "JWT",
-      "PostgreSQL",
-      "MySQL",
-      "Maven",
-      "Docker",
-      "OpenAPI / Swagger",
-      "JUnit 5",
-      "Mockito",
-      "SLF4J & Logback",
-      "Git & GitHub",
-    ],
-    certificate: {
-      title: "Earn your certificate",
-      description:
-        "Certificate of Completion is awarded after successful completion of all 19 modules, module quizzes, 5 practical application labs, and the final production-ready Spring Boot Capstone project.",
-      credentialNote: "Certificate of Completion — Java Backend & Full Stack",
+    instructor: {
+      name: "Marcus Vance",
+      role: "Staff Cloud & Platform Architect",
+      badge: "Top Instructor",
+      bio: "Marcus has architected cloud infrastructure for Fortune 500 financial institutions and SaaS unicorns, specializing in Kubernetes security, Terraform automation, and immutable infrastructure. 8+ years building production systems at scale.",
     },
+    reviews: [
+      {
+        name: "Rahul Sharma",
+        role: "Junior DevOps Engineer at Wipro",
+        rating: 5,
+        text: "This program transformed my career. The hands-on projects and real-world scenarios prepared me for actual production environments. Got placed within 2 weeks of completing the program.",
+      },
+      {
+        name: "Priya Patel",
+        role: "Cloud Engineer at TCS",
+        rating: 5,
+        text: "The Kubernetes and Terraform modules were exceptional. Marcus explains complex concepts with clarity. The paid internship gave me confidence to handle production deployments.",
+      },
+      {
+        name: "Arjun Mehta",
+        role: "SRE at a Series B startup",
+        rating: 4,
+        text: "Solid curriculum that covers everything from basics to advanced platform engineering. The community support is excellent — got help at 2 AM during my project deadline.",
+      },
+    ],
   },
 
-  devops: {
-    slug: "devops",
-    title: "DevOps Engineering Training Program: From Foundations to GenAI & Platform Ops",
+  "ai-machine-learning": {
+    slug: "ai-machine-learning",
+    category: "Artificial Intelligence & Data Science",
+    title: "AI / Machine Learning Program: From Python Basics to Production ML Systems",
+    description:
+      "A structured program that takes you from Python fundamentals to deploying ML models in production. You'll learn data wrangling, statistical foundations, classical ML algorithms, deep learning, computer vision, NLP, and MLOps — all through real datasets and end-to-end projects that mirror industry workflows.",
+    price: "₹1,49,999",
+    originalPrice: "₹1,99,999",
+    duration: "3 months",
+    modules: [
+      {
+        title: "Python & Data Foundations",
+        topics: [
+          "Python for data science — NumPy, Pandas, Matplotlib",
+          "Exploratory data analysis and data cleaning",
+          "Statistics and probability for ML",
+          "SQL for data extraction and feature engineering",
+        ],
+      },
+      {
+        title: "Classical Machine Learning",
+        topics: [
+          "Supervised learning — regression, classification, ensemble methods",
+          "Unsupervised learning — clustering, dimensionality reduction",
+          "Feature engineering and selection techniques",
+          "Model evaluation, cross-validation, and hyperparameter tuning",
+        ],
+      },
+      {
+        title: "Deep Learning & Neural Networks",
+        topics: [
+          "Neural network fundamentals — forward/backpropagation",
+          "CNNs for computer vision tasks",
+          "RNNs, LSTMs, and sequence modeling",
+          "Transfer learning and fine-tuning pre-trained models",
+        ],
+      },
+      {
+        title: "NLP & Generative AI",
+        topics: [
+          "Text preprocessing, embeddings, and transformers",
+          "Sentiment analysis and named entity recognition",
+          "Large Language Models — prompting and fine-tuning",
+          "Building RAG pipelines and AI-powered applications",
+        ],
+      },
+      {
+        title: "Computer Vision",
+        topics: [
+          "Image classification and object detection (YOLO, SSD)",
+          "Image segmentation and pose estimation",
+          "OpenCV for real-time video processing",
+          "Deploying vision models on edge devices",
+        ],
+      },
+      {
+        title: "MLOps & Production Deployment",
+        topics: [
+          "ML pipelines with MLflow and DVC",
+          "Model serving with FastAPI and Docker",
+          "Monitoring model drift and retraining strategies",
+          "A/B testing for ML models in production",
+        ],
+      },
+    ],
+    resources: [
+      "Full lifetime access to Jupyter notebooks, datasets, and video lectures",
+      "Pre-built ML project templates with clean documentation",
+      "Kaggle competition starter kits and walkthroughs",
+      "Private community with weekly office hours and doubt sessions",
+      "Certificate of completion recognized by hiring partners",
+    ],
+    instructor: {
+      name: "Dr. Ananya Krishnan",
+      role: "Principal Data Scientist & AI Researcher",
+      badge: "Top Instructor",
+      bio: "Ananya holds a Ph.D. in Machine Learning from IIT Bombay and has led AI teams at Amazon and a healthcare AI startup. Published 12+ papers in top conferences. Specializes in making complex ML concepts accessible through practical examples.",
+    },
+    reviews: [
+      {
+        name: "Vikram Singh",
+        role: "ML Engineer at Infosys",
+        rating: 5,
+        text: "The best ML program I've encountered. The progression from basics to production deployment is seamless. The capstone project became my portfolio centerpiece during interviews.",
+      },
+      {
+        name: "Sneha Gupta",
+        role: "Data Analyst at Deloitte",
+        rating: 5,
+        text: "Dr. Krishnan's teaching style is incredible. Complex math concepts explained with intuition first, then code. The NLP module alone was worth the entire investment.",
+      },
+      {
+        name: "Karthik Nair",
+        role: "AI Engineer at a healthtech startup",
+        rating: 4,
+        text: "Practical, no-nonsense curriculum. The MLOps section is rare in most courses and it gave me a huge edge. Got multiple offers after the internship phase.",
+      },
+    ],
+  },
+
+  "full-stack-development": {
+    slug: "full-stack-development",
+    category: "Software Engineering & Web Development",
+    title: "Full Stack Development Program: From HTML to Scalable Distributed Systems",
+    description:
+      "Master front-end finesse, back-end architecture, and database design in one integrated program. You'll build and deploy production-grade web applications using React, Node.js, Spring Boot, and cloud databases — going from a blank editor to a fully deployed, scalable system with CI/CD.",
+    price: "₹1,49,999",
+    originalPrice: "₹1,99,999",
+    duration: "3 months",
+    modules: [
+      {
+        title: "Frontend Fundamentals & React",
+        topics: [
+          "HTML5, CSS3, responsive design, and accessibility",
+          "JavaScript ES6+ and TypeScript essentials",
+          "React — components, hooks, state management, routing",
+          "Next.js for server-side rendering and static generation",
+        ],
+      },
+      {
+        title: "Backend Development (Node.js)",
+        topics: [
+          "Node.js runtime, Express.js REST APIs",
+          "Authentication — JWT, OAuth, session management",
+          "Input validation, error handling, and middleware patterns",
+          "WebSockets and real-time communication",
+        ],
+      },
+      {
+        title: "Databases & Data Modeling",
+        topics: [
+          "PostgreSQL — schema design, indexing, query optimization",
+          "MongoDB — document modeling and aggregation pipelines",
+          "Redis for caching and session storage",
+          "Database migrations and ORM patterns (Prisma, Mongoose)",
+        ],
+      },
+      {
+        title: "Backend Development (Spring Boot)",
+        topics: [
+          "Java fundamentals and Spring ecosystem",
+          "REST API development with Spring Boot",
+          "JPA/Hibernate for database interaction",
+          "Microservices patterns and inter-service communication",
+        ],
+      },
+      {
+        title: "System Design & Architecture",
+        topics: [
+          "Monolith vs microservices trade-offs",
+          "Message queues (Kafka, RabbitMQ) and event-driven architecture",
+          "Load balancing, caching strategies, and CDNs",
+          "Designing for scale — horizontal scaling and database sharding",
+        ],
+      },
+      {
+        title: "DevOps for Developers",
+        topics: [
+          "Docker and containerized development workflows",
+          "CI/CD pipelines with GitHub Actions",
+          "Cloud deployment (AWS/Vercel/Railway)",
+          "Monitoring, logging, and production debugging",
+        ],
+      },
+    ],
+    resources: [
+      "Full lifetime access to video lectures, code repositories, and architecture diagrams",
+      "Starter templates for React, Next.js, Express, and Spring Boot projects",
+      "System design interview preparation guide with solutions",
+      "Private community with code reviews and pair programming sessions",
+      "Certificate of completion recognized by hiring partners",
+    ],
+    instructor: {
+      name: "Rohan Deshmukh",
+      role: "Senior Staff Engineer & Tech Lead",
+      badge: "Top Instructor",
+      bio: "Rohan has built and scaled products at Flipkart, Razorpay, and two YC-backed startups. He specializes in full-stack architecture, distributed systems, and mentoring junior engineers into senior roles. 10+ years of shipping production code.",
+    },
+    reviews: [
+      {
+        name: "Aditya Joshi",
+        role: "SDE-1 at a fintech startup",
+        rating: 5,
+        text: "From knowing only basic HTML to building a full SaaS product in 3 months. The Spring Boot + React combination prepared me for both startups and enterprise roles.",
+      },
+      {
+        name: "Meera Iyer",
+        role: "Frontend Developer at Zoho",
+        rating: 5,
+        text: "Rohan's system design sessions are gold. He explains trade-offs the way a senior engineer would in a real design review. The code review culture in this program is unmatched.",
+      },
+      {
+        name: "Sahil Khan",
+        role: "Backend Developer at a logistics company",
+        rating: 4,
+        text: "Comprehensive curriculum that doesn't cut corners. The database module alone saved me months of self-study. Placement support was proactive and well-organized.",
+      },
+    ],
+  },
+};
+
+// Full course data for /courses/[slug] pages (teammate's format)
+const fullCourses: Course[] = [
+  {
+    slug: "devops-engineering",
+    title: "DevOps Engineering Program: From Foundations to GenAI & Platform Ops",
     shortTitle: "DevOps Engineering",
     category: "Cloud & Platform Infrastructure",
-    subtitle: "12-Week Immersive Pipeline: Linux, AWS, Azure, Docker, Kubernetes, GitOps, Terraform, Security & GenAI AIOps",
-    description:
-      "A comprehensive, production-grade 12-week (60-day) training program designed around real-world infrastructure, 4 milestone projects, and industry-standard tooling across AWS, Azure, Kubernetes, GitOps, and GenAI for DevOps.",
+    subtitle: "Master CI/CD, containers and cloud infrastructure",
+    description: "Our DevOps Engineering Training Program follows a proven pedagogical logic: Foundation before abstraction, one cloud deep before two clouds broad, never learn a tool in isolation, and automate what you first did by hand.",
     fullDescription: [
-      "Our DevOps Engineering Training Program follows a proven pedagogical logic: Foundation before abstraction (Linux, shell scripting, networking, and Git first), One cloud deep before two clouds broad (AWS taught to working depth before Azure), Never learn a tool in isolation (paired with hands-on daily assignments), Automate what you first did by hand (manual cloud/k8s precedes Terraform/Helm/ArgoCD), and GenAI comes last on purpose (AI tooling introduced after understanding infrastructure, logs, and common failure patterns).",
-      "Over 12 weeks and 60 intensive days, you will deliver 4 major milestone projects: Project 1 (Secure Cloud Foundation on AWS), Project 2 (Containerized Application on Cloud Kubernetes), Project 3 (End-to-End CI/CD with GitOps), and the Final Capstone (Enterprise-Grade DevOps Platform with GenAI-assisted operations).",
+      "Our DevOps Engineering Training Program follows a proven pedagogical logic: Foundation before abstraction (Linux, shell scripting, networking, and Git first), One cloud deep before two clouds broad (AWS taught to working depth before Azure).",
+      "Never learn a tool in isolation (paired with hands-on daily assignments), Automate what you first did by hand (manual cloud/k8s precedes Terraform/Helm/ArgoCD), and GenAI comes last on purpose (AI tooling introduced after understanding infrastructure, logs, and common failure patterns).",
     ],
-    coverImage:
-      "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&w=1200&q=80",
-    previewVideoImage:
-      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80",
+    coverImage: "/images/devops-cover.jpg",
+    previewVideoImage: "/images/devops-preview.jpg",
     price: 149999,
     originalPrice: 199999,
-    level: "Advanced",
-    totalModules: 12,
-    totalActivities: 60,
-    totalCourses: 60,
+    level: "Beginner",
+    totalModules: 6,
+    totalActivities: 48,
+    totalCourses: 1,
     totalAssignments: 24,
     totalQuizzes: 12,
-    rating: 4.95,
-    reviewsCount: "4.8k Reviews",
-    lastUpdated: "Current Cohort (12 Weeks / 60 Days)",
+    rating: 4.8,
+    reviewsCount: "120+",
+    lastUpdated: "August 2026",
     instructor: {
       name: "Marcus Vance",
       title: "Staff Cloud & Platform Architect",
-      email: "marcus.vance@lms.com",
-      avatar:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&h=200&q=80",
+      email: "marcus@realmconsulting.in",
+      avatar: "/images/instructor-marcus.jpg",
       badge: "Top Instructor",
       bio: "Marcus has architected cloud infrastructure for Fortune 500 financial institutions and SaaS unicorns, specializing in Kubernetes security, Terraform automation, and immutable infrastructure.",
       profileLink: "#",
     },
     modules: [
-      {
-        id: "devops-m1",
-        number: "01",
-        title: "Core Foundations: Linux, Shell Scripting, Networking & Git (Week 1 / Days 1–5)",
-        description:
-          "Build operating-system, scripting, networking, and version-control fluency. Covers Linux OS basics & package managers (apt/yum), basic & advanced shell scripting with awk/sed/grep and cron, TCP/IP networking & subnetting, and Git/GitHub branching, rebasing, and PR workflows. Checkpoint: Linux command fluency, shell automation, and Git workflow.",
-        videosCount: 5,
-        readingsCount: 5,
-        assignmentsCount: 5,
-        quizCount: 1,
-        isExpandedByDefault: true,
-      },
-      {
-        id: "devops-m2",
-        number: "02",
-        title: "Cloud Foundations: YAML, AWS IAM, VPC, EC2 & Storage (Week 2 / Days 6–10)",
-        description:
-          "Introduce YAML and establish core AWS foundations across identity, networking, compute, and storage. Covers YAML syntax & linters, AWS IAM least-privilege policies & MFA, custom multi-AZ VPC design with NAT/route tables, EC2 compute & EBS volumes, S3 bucket policies, CloudFront CDN, and WAF rules. Checkpoint: Working AWS identity, network, compute, and storage architecture.",
-        videosCount: 5,
-        readingsCount: 5,
-        assignmentsCount: 5,
-        quizCount: 1,
-      },
-      {
-        id: "devops-m3",
-        number: "03",
-        title: "AWS Serverless, Security & Monitoring (Week 3 / Days 11–15 • Milestone Project 1)",
-        description:
-          "Extend AWS skills into serverless architecture, encryption, secrets, monitoring, and threat detection. Covers AWS Lambda & API Gateway CRUD APIs, AWS KMS envelope encryption & Secrets Manager CLI, CloudWatch metrics, alarms & Logs Insights, Security Hub & GuardDuty automated findings. Checkpoint: Project 1 — Secure Cloud Foundation on AWS.",
-        videosCount: 5,
-        readingsCount: 5,
-        assignmentsCount: 5,
-        quizCount: 1,
-      },
-      {
-        id: "devops-m4",
-        number: "04",
-        title: "Azure Cloud Foundations (Week 4 / Days 16–20)",
-        description:
-          "Build the Azure equivalent of the cloud foundation: governance, networking, identity/secrets, compute, and monitoring. Covers Azure RBAC & custom Azure Policies, VNets, NSGs, VNet peering & Private Endpoints, Azure Key Vault & Managed Identities, Azure App Services & HTTP Functions, Azure Monitor Log Analytics & Application Gateway routing/WAF. Checkpoint: Azure governance, private networking, secrets, and compute.",
-        videosCount: 5,
-        readingsCount: 5,
-        assignmentsCount: 5,
-        quizCount: 1,
-      },
-      {
-        id: "devops-m5",
-        number: "05",
-        title: "Docker & Containerization (Week 5 / Days 21–25)",
-        description:
-          "Learn to package applications into secure, efficient containers and operate multi-container workloads. Covers Docker images vs. containers, Dockerfile layer caching, Docker networking & persistent volumes, Docker Compose 3-tier deployments, container registries (ACR/ECR) with vulnerability scanning, and multi-stage non-root build optimizations. Checkpoint: Container security and working multi-container apps.",
-        videosCount: 5,
-        readingsCount: 5,
-        assignmentsCount: 5,
-        quizCount: 1,
-      },
-      {
-        id: "devops-m6",
-        number: "06",
-        title: "Kubernetes Fundamentals & Managed AKS/EKS (Week 6 / Days 26–30 • Milestone Project 2)",
-        description:
-          "Move from containers to Kubernetes orchestration, networking, configuration, storage, and managed clusters. Covers Control-plane components, Pods, Deployments, ReplicaSets, Services (ClusterIP/NodePort/LoadBalancer), Ingress controllers, ConfigMaps, Secrets, PVCs, and managed AKS/EKS provisioning with node pools. Checkpoint: Project 2 — Containerized Application on Cloud Kubernetes.",
-        videosCount: 5,
-        readingsCount: 5,
-        assignmentsCount: 5,
-        quizCount: 1,
-      },
-      {
-        id: "devops-m7",
-        number: "07",
-        title: "Advanced Kubernetes, Helm, Autoscaling & Security (Week 7 / Days 31–35)",
-        description:
-          "Deepen Kubernetes skills through Helm packaging, autoscaling, RBAC, network security, cluster provisioning, and live debugging. Covers Helm charts, values.yaml & rollbacks, Karpenter & KEDA event-driven autoscaling vs. HPA, namespace-scoped RBAC, NetworkPolicies, Pod Security Standards, KOps cluster lifecycle, and kubectl troubleshooting (CrashLoopBackOff, ImagePullBackOff). Checkpoint: Advanced Kubernetes security and autoscaling.",
-        videosCount: 5,
-        readingsCount: 5,
-        assignmentsCount: 5,
-        quizCount: 1,
-      },
-      {
-        id: "devops-m8",
-        number: "08",
-        title: "GitOps & CI/CD Tooling (Week 8 / Days 36–40)",
-        description:
-          "Automate application delivery using GitOps and compare major CI/CD platforms. Covers GitOps principles & ArgoCD architecture, ArgoCD app-of-apps pattern with automated sync & self-heal, Jenkins declarative pipelines & Jenkinsfile plugins, GitHub Actions workflows, GitLab CI YAML, Azure DevOps YAML pipelines, and Harness progressive delivery. Checkpoint: Working GitOps deployment with comparative CI/CD tooling.",
-        videosCount: 5,
-        readingsCount: 5,
-        assignmentsCount: 5,
-        quizCount: 1,
-      },
-      {
-        id: "devops-m9",
-        number: "09",
-        title: "CI/CD Design, Platform Engineering & Governance (Week 9 / Days 41–45 • Milestone Project 3)",
-        description:
-          "Design production-oriented delivery workflows, internal developer platforms, landing zones, and cloud governance. Covers end-to-end pipeline promotion strategies (build-test-scan-deploy), internal developer platforms & golden paths, cloud tagging policies & cost governance, PowerShell & Java automation scripting. Checkpoint: Project 3 — End-to-End CI/CD with GitOps.",
-        videosCount: 5,
-        readingsCount: 5,
-        assignmentsCount: 5,
-        quizCount: 1,
-      },
-      {
-        id: "devops-m10",
-        number: "10",
-        title: "Infrastructure as Code: Terraform, Ansible & Policy as Code (Week 10 / Days 46–50)",
-        description:
-          "Automate infrastructure provisioning and configuration management with declarative policy enforcement. Covers Terraform providers, resources, state lifecycle, reusable Terraform modules, S3/Azure remote state with state locking, Ansible inventory, playbooks, roles & idempotency, and Open Policy Agent (OPA) Rego & Sentinel policy guardrails. Checkpoint: Modular Terraform, remote state, and policy-as-code guardrails.",
-        videosCount: 5,
-        readingsCount: 5,
-        assignmentsCount: 5,
-        quizCount: 1,
-      },
-      {
-        id: "devops-m11",
-        number: "11",
-        title: "Security & Compliance (Week 11 / Days 51–55)",
-        description:
-          "Apply comprehensive DevSecOps practices across identity, secrets, cloud posture, code quality, and secret scanning. Covers IAM policy evaluation & permission boundaries, HashiCorp Vault dynamic database secrets & rotation, Wiz Cloud Security Posture Management (CSPM), SonarQube code quality gates & SAST CI integration, TruffleHog & GitGuardian secret scanning with pre-commit hooks. Checkpoint: DevSecOps least-privilege, CSPM, SAST, and secret controls.",
-        videosCount: 5,
-        readingsCount: 5,
-        assignmentsCount: 5,
-        quizCount: 1,
-      },
-      {
-        id: "devops-m12",
-        number: "12",
-        title: "Observability, GenAI for DevOps & Final Capstone (Week 12 / Days 56–60 • Final Capstone)",
-        description:
-          "Full-stack observability and cutting-edge GenAI for real-world DevOps workflows. Covers Datadog & Dynatrace APM with distributed tracing, ELK Stack & Splunk log indexing with Kibana dashboards, Prometheus scraping & Grafana PromQL alerting, Ollama local LLMs & OpenAI API log analysis agents for automated root cause analysis. Checkpoint: Final Capstone Project — Enterprise-Grade DevOps Platform.",
-        videosCount: 5,
-        readingsCount: 5,
-        assignmentsCount: 5,
-        quizCount: 1,
-      },
+      { id: "m1", number: "01", title: "Linux & Networking Fundamentals", description: "Linux file system, permissions, process management, shell scripting, TCP/IP, DNS, HTTP, and security basics.", videosCount: 12, readingsCount: 6, assignmentsCount: 4, quizCount: 2, isExpandedByDefault: true },
+      { id: "m2", number: "02", title: "Version Control & Collaboration", description: "Git internals, branching, merging, rebasing, GitHub/GitLab workflows, monorepo vs polyrepo patterns.", videosCount: 8, readingsCount: 4, assignmentsCount: 3, quizCount: 2 },
+      { id: "m3", number: "03", title: "Cloud Infrastructure (AWS Deep Dive)", description: "EC2, VPC, IAM, S3, RDS, load balancing, auto-scaling, CloudWatch monitoring, and cost optimization.", videosCount: 14, readingsCount: 8, assignmentsCount: 5, quizCount: 2 },
+      { id: "m4", number: "04", title: "Containers & Orchestration", description: "Docker images, multi-stage builds, Docker Compose, Kubernetes architecture, Helm charts, and operators.", videosCount: 12, readingsCount: 6, assignmentsCount: 4, quizCount: 2 },
+      { id: "m5", number: "05", title: "CI/CD Pipelines", description: "Jenkins pipelines, GitHub Actions, ArgoCD, GitOps, blue-green and canary deployment strategies.", videosCount: 10, readingsCount: 5, assignmentsCount: 4, quizCount: 2 },
+      { id: "m6", number: "06", title: "Infrastructure as Code & GenAI Ops", description: "Terraform modules, Ansible, AI-powered log analysis, incident response, and platform engineering.", videosCount: 10, readingsCount: 6, assignmentsCount: 4, quizCount: 2 },
     ],
     learningOutcomes: [
-      "Confidently work on Linux systems, write automation scripts, and manage code using Git",
-      "Provision and secure production infrastructure on both AWS and Azure multi-cloud",
-      "Containerize polyglot applications and deploy, scale, and troubleshoot on Kubernetes (AKS/EKS)",
-      "Build and manage automated CI/CD pipelines and implement GitOps-based deployments using ArgoCD",
-      "Provision Infrastructure as Code using Terraform and Ansible, with OPA / Sentinel policy-as-code guardrails",
-      "Apply core security and compliance practices, including Vault secrets management and SAST/secret vulnerability scanning",
-      "Set up full-stack observability using Prometheus, Grafana, ELK/Splunk, Datadog, and Dynatrace APM",
-      "Apply GenAI tools (Ollama / OpenAI APIs) to DevOps use cases such as log analysis, troubleshooting agents, and AIOps",
-      "Independently deliver a production-style, end-to-end DevOps platform (Final Capstone Project)",
+      "Design and implement CI/CD pipelines for production applications",
+      "Deploy and manage containerized applications on Kubernetes",
+      "Provision cloud infrastructure using Terraform and Ansible",
+      "Monitor, troubleshoot, and optimize production systems",
+      "Apply GenAI tooling for infrastructure management",
     ],
-    tools: [
-      "AWS",
-      "Azure",
-      "Docker",
-      "Kubernetes",
-      "Terraform",
-      "Ansible",
-      "Helm",
-      "ArgoCD",
-      "Jenkins",
-      "GitHub Actions",
-      "GitLab CI",
-      "Prometheus",
-      "Grafana",
-      "ELK Stack",
-      "Splunk",
-      "Datadog",
-      "HashiCorp Vault",
-      "SonarQube",
-      "TruffleHog",
-      "OPA / Rego",
-      "Ollama & OpenAI",
-    ],
+    tools: ["Docker", "Kubernetes", "Jenkins", "AWS", "Terraform", "Ansible", "ArgoCD", "Prometheus"],
     certificate: {
-      title: "Earn your certificate",
-      description:
-        "Complete all 12 modules, submit daily hands-on assignments across 60 days, and deliver all 4 milestone projects including the Final Enterprise Capstone to earn your recognized DevOps Engineering Credential.",
-      credentialNote: "Certificate of Completion — DevOps Engineering",
+      title: "DevOps Engineering Certificate",
+      description: "Earn a certificate upon successful completion of all modules and the capstone project.",
+      credentialNote: "Recognized by our hiring partner network",
     },
   },
-
-  "ai-ml": {
-    slug: "ai-ml",
-    title: "AI & Machine Learning Engineering: From Models to MLOps",
+  {
+    slug: "ai-machine-learning",
+    title: "AI / Machine Learning Program: From Python Basics to Production ML Systems",
     shortTitle: "AI / Machine Learning",
-    category: "Artificial Intelligence",
-    subtitle: "Develop your course outline and contents and set up the drip feed to schedule lesson delivery",
-    description:
-      "Learn to train, fine-tune, and deploy state-of-the-art machine learning models, LLMs, and computer vision systems across healthcare, finance, and enterprise automation.",
+    category: "Artificial Intelligence & Data Science",
+    subtitle: "Build and ship ML models across industries",
+    description: "A structured program from Python fundamentals to deploying ML models in production. Learn data wrangling, statistical foundations, classical ML, deep learning, computer vision, NLP, and MLOps.",
     fullDescription: [
-      "Artificial Intelligence is transforming every sector of global technology. This curriculum takes you beyond theoretical math into building real predictive pipelines, deep neural networks, and generative AI applications.",
-      "You will work with PyTorch, TensorFlow, Scikit-learn, HuggingFace transformers, vector databases, and LangChain to deploy robust models behind high-throughput APIs.",
+      "A structured program that takes you from Python fundamentals to deploying ML models in production.",
+      "You'll learn data wrangling, statistical foundations, classical ML algorithms, deep learning, computer vision, NLP, and MLOps — all through real datasets and end-to-end projects that mirror industry workflows.",
     ],
-    coverImage:
-      "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1200&q=80",
-    previewVideoImage:
-      "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80",
+    coverImage: "/images/aiml-cover.jpg",
+    previewVideoImage: "/images/aiml-preview.jpg",
     price: 149999,
     originalPrice: 199999,
-    level: "Advanced",
-    totalModules: 4,
-    totalActivities: 17,
-    totalCourses: 42,
-    totalAssignments: 11,
-    totalQuizzes: 110,
-    rating: 4.92,
-    reviewsCount: "6.2k Reviews",
-    lastUpdated: "04 July 2025",
+    level: "Beginner",
+    totalModules: 6,
+    totalActivities: 52,
+    totalCourses: 1,
+    totalAssignments: 26,
+    totalQuizzes: 14,
+    rating: 4.9,
+    reviewsCount: "95+",
+    lastUpdated: "August 2026",
     instructor: {
-      name: "Dr. Elena Rostova",
-      title: "AI Research Scientist & MLOps Lead",
-      email: "elena.rostova@lms.com",
-      avatar:
-        "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&h=200&q=80",
+      name: "Dr. Ananya Krishnan",
+      title: "Principal Data Scientist & AI Researcher",
+      email: "ananya@realmconsulting.in",
+      avatar: "/images/instructor-ananya.jpg",
       badge: "Top Instructor",
-      bio: "Dr. Elena Rostova is an AI researcher who has developed Computer Vision and Generative LLM solutions for global biomedical and robotics initiatives.",
+      bio: "Ananya holds a Ph.D. in Machine Learning from IIT Bombay and has led AI teams at Amazon and a healthcare AI startup. Published 12+ papers in top conferences.",
       profileLink: "#",
     },
     modules: [
-      {
-        id: "ai-m1",
-        number: "01",
-        title: "Python for Data Science, Pandas & Mathematical Foundations",
-        description:
-          "Master vector computation with NumPy, data wrangling with Pandas, exploratory data analysis, and essential linear algebra & probability calculus.",
-        videosCount: 4,
-        readingsCount: 3,
-        assignmentsCount: 2,
-        quizCount: 1,
-        isExpandedByDefault: true,
-      },
-      {
-        id: "ai-m2",
-        number: "02",
-        title: "Supervised & Unsupervised Machine Learning with Scikit-Learn",
-        description:
-          "Implement regression, decision trees, random forests, gradient boosting (XGBoost), clustering, and dimensional reduction techniques.",
-        videosCount: 4,
-        readingsCount: 2,
-        assignmentsCount: 2,
-        quizCount: 1,
-      },
-      {
-        id: "ai-m3",
-        number: "03",
-        title: "Deep Learning, PyTorch & Transformer Architectures",
-        description:
-          "Build convolutional networks for vision, sequential models for NLP, and fine-tune modern Transformer models (BERT, LLaMA) with HuggingFace.",
-        videosCount: 5,
-        readingsCount: 3,
-        assignmentsCount: 3,
-        quizCount: 2,
-      },
-      {
-        id: "ai-m4",
-        number: "04",
-        title: "Generative AI, Vector Databases & Production MLOps",
-        description:
-          "Build RAG pipelines with Pinecone/Qdrant, orchestrate agentic workflows with LangChain, and serve scalable model endpoints via FastAPI and Triton.",
-        videosCount: 4,
-        readingsCount: 3,
-        assignmentsCount: 3,
-        quizCount: 2,
-      },
+      { id: "m1", number: "01", title: "Python & Data Foundations", description: "NumPy, Pandas, Matplotlib, exploratory data analysis, statistics, and SQL for feature engineering.", videosCount: 12, readingsCount: 6, assignmentsCount: 4, quizCount: 2, isExpandedByDefault: true },
+      { id: "m2", number: "02", title: "Classical Machine Learning", description: "Supervised and unsupervised learning, feature engineering, model evaluation, and hyperparameter tuning.", videosCount: 14, readingsCount: 8, assignmentsCount: 5, quizCount: 3 },
+      { id: "m3", number: "03", title: "Deep Learning & Neural Networks", description: "Neural network fundamentals, CNNs, RNNs, LSTMs, transfer learning, and fine-tuning.", videosCount: 12, readingsCount: 6, assignmentsCount: 4, quizCount: 2 },
+      { id: "m4", number: "04", title: "NLP & Generative AI", description: "Text preprocessing, transformers, sentiment analysis, LLMs, prompting, and RAG pipelines.", videosCount: 10, readingsCount: 5, assignmentsCount: 4, quizCount: 2 },
+      { id: "m5", number: "05", title: "Computer Vision", description: "Image classification, object detection, segmentation, OpenCV, and edge deployment.", videosCount: 10, readingsCount: 5, assignmentsCount: 4, quizCount: 2 },
+      { id: "m6", number: "06", title: "MLOps & Production Deployment", description: "ML pipelines with MLflow, model serving with FastAPI, monitoring drift, and A/B testing.", videosCount: 8, readingsCount: 4, assignmentsCount: 5, quizCount: 3 },
     ],
     learningOutcomes: [
-      "Mathematical and statistical foundations for Machine Learning",
-      "Feature engineering, clean pipelines, and exploratory data analysis",
-      "Classical machine learning models with Scikit-Learn & XGBoost",
-      "Deep Learning with PyTorch and CUDA GPU acceleration",
-      "Computer Vision with OpenCV and Natural Language Processing",
-      "Fine-tuning Open-Source Large Language Models (LLMs)",
-      "Building Retrieval-Augmented Generation (RAG) with Vector DBs",
-      "Deploying scalable AI inference APIs and monitoring model drift",
+      "Build end-to-end ML pipelines from data collection to deployment",
+      "Implement deep learning models for computer vision and NLP",
+      "Deploy and monitor ML models in production environments",
+      "Apply GenAI and LLM techniques to real-world problems",
+      "Design experiments and evaluate model performance rigorously",
     ],
-    tools: [
-      "Python",
-      "PyTorch",
-      "TensorFlow",
-      "HuggingFace",
-      "Scikit-Learn",
-      "LangChain",
-      "Pinecone",
-      "FastAPI",
-    ],
+    tools: ["Python", "TensorFlow", "PyTorch", "scikit-learn", "Pandas", "OpenCV", "MLflow", "FastAPI"],
     certificate: {
-      title: "Earn your certificate",
-      description:
-        "Complete your course, submit all assignment and earn your certificate. Add this credential to your LinkedIn profile, resume, or CV. Share it on social media and in your performance review.",
-      credentialNote: "Certificate on completion",
+      title: "AI / Machine Learning Certificate",
+      description: "Earn a certificate upon successful completion of all modules and the capstone project.",
+      credentialNote: "Recognized by our hiring partner network",
     },
   },
-};
-
-export function getCourseBySlug(slug: string): Course | undefined {
-  return courses[slug];
-}
+  {
+    slug: "full-stack-development",
+    title: "Full Stack Development Program: From HTML to Scalable Distributed Systems",
+    shortTitle: "Full Stack Development",
+    category: "Software Engineering & Web Development",
+    subtitle: "Master frontend, backend, and system design",
+    description: "Build and deploy production-grade web applications using React, Node.js, Spring Boot, and cloud databases — going from a blank editor to a fully deployed, scalable system.",
+    fullDescription: [
+      "Master front-end finesse, back-end architecture, and database design in one integrated program.",
+      "You'll build and deploy production-grade web applications using React, Node.js, Spring Boot, and cloud databases — going from a blank editor to a fully deployed, scalable system with CI/CD.",
+    ],
+    coverImage: "/images/fullstack-cover.jpg",
+    previewVideoImage: "/images/fullstack-preview.jpg",
+    price: 149999,
+    originalPrice: 199999,
+    level: "Beginner",
+    totalModules: 6,
+    totalActivities: 54,
+    totalCourses: 1,
+    totalAssignments: 28,
+    totalQuizzes: 12,
+    rating: 4.7,
+    reviewsCount: "140+",
+    lastUpdated: "August 2026",
+    instructor: {
+      name: "Rohan Deshmukh",
+      title: "Senior Staff Engineer & Tech Lead",
+      email: "rohan@realmconsulting.in",
+      avatar: "/images/instructor-rohan.jpg",
+      badge: "Top Instructor",
+      bio: "Rohan has built and scaled products at Flipkart, Razorpay, and two YC-backed startups. 10+ years of shipping production code.",
+      profileLink: "#",
+    },
+    modules: [
+      { id: "m1", number: "01", title: "Frontend Fundamentals & React", description: "HTML5, CSS3, responsive design, JavaScript ES6+, TypeScript, React, and Next.js.", videosCount: 14, readingsCount: 8, assignmentsCount: 5, quizCount: 2, isExpandedByDefault: true },
+      { id: "m2", number: "02", title: "Backend Development (Node.js)", description: "Node.js, Express.js REST APIs, authentication, middleware, and WebSockets.", videosCount: 12, readingsCount: 6, assignmentsCount: 5, quizCount: 2 },
+      { id: "m3", number: "03", title: "Databases & Data Modeling", description: "PostgreSQL, MongoDB, Redis, migrations, and ORM patterns.", videosCount: 10, readingsCount: 6, assignmentsCount: 4, quizCount: 2 },
+      { id: "m4", number: "04", title: "Backend Development (Spring Boot)", description: "Java fundamentals, Spring ecosystem, JPA/Hibernate, and microservices patterns.", videosCount: 12, readingsCount: 6, assignmentsCount: 5, quizCount: 2 },
+      { id: "m5", number: "05", title: "System Design & Architecture", description: "Monolith vs microservices, message queues, load balancing, caching, and scaling.", videosCount: 8, readingsCount: 5, assignmentsCount: 4, quizCount: 2 },
+      { id: "m6", number: "06", title: "DevOps for Developers", description: "Docker, CI/CD with GitHub Actions, cloud deployment, monitoring, and debugging.", videosCount: 8, readingsCount: 4, assignmentsCount: 5, quizCount: 2 },
+    ],
+    learningOutcomes: [
+      "Build production-grade web applications with React and Node.js",
+      "Design and implement RESTful APIs with proper authentication",
+      "Work with both SQL and NoSQL databases effectively",
+      "Apply system design principles for scalable architectures",
+      "Deploy and maintain applications using modern DevOps practices",
+    ],
+    tools: ["React", "Node.js", "TypeScript", "Spring Boot", "PostgreSQL", "MongoDB", "Docker", "Kafka"],
+    certificate: {
+      title: "Full Stack Development Certificate",
+      description: "Earn a certificate upon successful completion of all modules and the capstone project.",
+      credentialNote: "Recognized by our hiring partner network",
+    },
+  },
+];
 
 export function getAllCourses(): Course[] {
-  return Object.values(courses);
+  return fullCourses;
+}
+
+export function getCourseBySlug(slug: string): Course | undefined {
+  return fullCourses.find((c) => c.slug === slug);
 }

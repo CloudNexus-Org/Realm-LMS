@@ -10,7 +10,7 @@ export default function CareerPipeline() {
           </span>
           <h2>From inquiry to offer letter — one continuous build.</h2>
           <p>
-            Every student runs through the same four stages. No shortcuts, no
+            Every student runs through the same three stages. No shortcuts, no
             black box — just training, real work, and a placement push at the
             end.
           </p>
