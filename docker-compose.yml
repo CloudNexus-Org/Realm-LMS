@@ -1,23 +1,13 @@
 services:
-  db:
-    image: postgres:16-alpine
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: realm_consulting
-    ports:
-      - "5432:5432"
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
     environment:
-      DATABASE_URL: "postgresql://postgres:postgres@db:5432/realm_consulting"
-    depends_on:
-      - db
+      - MONGODB_URI=${MONGODB_URI}
+      - NODE_ENV=production
+      - PORT=3000
+    restart: unless-stopped
 
-volumes:
-  pgdata:

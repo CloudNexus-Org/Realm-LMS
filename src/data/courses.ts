@@ -291,12 +291,12 @@ export const courses: Record<string, Course> = {
     title: "DevOps Engineering Training Program: From Foundations to GenAI & Platform Ops",
     shortTitle: "DevOps Engineering",
     category: "Cloud & Platform Infrastructure",
-    subtitle: "12-Week Immersive Pipeline: Linux, AWS, Azure, Docker, Kubernetes, GitOps, Terraform, Security & GenAI AIOps",
+    subtitle: "12-Module Progressive Roadmap: Linux, AWS, Azure, Docker, Kubernetes, GitOps, Terraform, Security & GenAI AIOps",
     description:
-      "A comprehensive, production-grade 12-week (60-day) training program designed around real-world infrastructure, 4 milestone projects, and industry-standard tooling across AWS, Azure, Kubernetes, GitOps, and GenAI for DevOps.",
+      "A structured, industry-oriented DevOps and cloud infrastructure program designed around real-world infrastructure, 4 milestone projects, and industry-standard tooling across AWS, Azure, Kubernetes, GitOps, and GenAI for DevOps.",
     fullDescription: [
-      "Our DevOps Engineering Training Program follows a proven pedagogical logic: Foundation before abstraction (Linux, shell scripting, networking, and Git first), One cloud deep before two clouds broad (AWS taught to working depth before Azure), Never learn a tool in isolation (paired with hands-on daily assignments), Automate what you first did by hand (manual cloud/k8s precedes Terraform/Helm/ArgoCD), and GenAI comes last on purpose (AI tooling introduced after understanding infrastructure, logs, and common failure patterns).",
-      "Over 12 weeks and 60 intensive days, you will deliver 4 major milestone projects: Project 1 (Secure Cloud Foundation on AWS), Project 2 (Containerized Application on Cloud Kubernetes), Project 3 (End-to-End CI/CD with GitOps), and the Final Capstone (Enterprise-Grade DevOps Platform with GenAI-assisted operations).",
+      "Our DevOps Engineering Training Program follows a proven pedagogical logic: Foundation before abstraction (Linux, shell scripting, networking, and Git first), One cloud deep before two clouds broad (AWS taught to working depth before Azure), Never learn a tool in isolation (paired with hands-on assignments), Automate what you first did by hand (manual cloud/k8s precedes Terraform/Helm/ArgoCD), and GenAI comes last on purpose (AI tooling introduced after understanding infrastructure, logs, and common failure patterns).",
+      "Across 12 structured modules, you will deliver 4 major milestone projects: Project 1 (Secure Cloud Foundation on AWS), Project 2 (Containerized Application on Cloud Kubernetes), Project 3 (End-to-End CI/CD with GitOps), and the Final Capstone (Enterprise-Grade DevOps Platform with GenAI-assisted operations).",
     ],
     coverImage:
       "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&w=1200&q=80",
@@ -312,7 +312,7 @@ export const courses: Record<string, Course> = {
     totalQuizzes: 12,
     rating: 4.95,
     reviewsCount: "4.8k Reviews",
-    lastUpdated: "Current Cohort (12 Weeks / 60 Days)",
+    lastUpdated: "Current Cohort (12 Modules / 4 Milestone Projects)",
     instructor: {
       name: "Marcus Vance",
       title: "Staff Cloud & Platform Architect",
@@ -327,7 +327,7 @@ export const courses: Record<string, Course> = {
       {
         id: "devops-m1",
         number: "01",
-        title: "Core Foundations: Linux, Shell Scripting, Networking & Git (Week 1 / Days 1–5)",
+        title: "Core Foundations: Linux, Shell Scripting, Networking & Git",
         description:
           "Build operating-system, scripting, networking, and version-control fluency. Covers Linux OS basics & package managers (apt/yum), basic & advanced shell scripting with awk/sed/grep and cron, TCP/IP networking & subnetting, and Git/GitHub branching, rebasing, and PR workflows. Checkpoint: Linux command fluency, shell automation, and Git workflow.",
         videosCount: 5,
@@ -339,7 +339,7 @@ export const courses: Record<string, Course> = {
       {
         id: "devops-m2",
         number: "02",
-        title: "Cloud Foundations: YAML, AWS IAM, VPC, EC2 & Storage (Week 2 / Days 6–10)",
+        title: "Cloud Foundations: YAML, AWS IAM, VPC, EC2 & Storage",
         description:
           "Introduce YAML and establish core AWS foundations across identity, networking, compute, and storage. Covers YAML syntax & linters, AWS IAM least-privilege policies & MFA, custom multi-AZ VPC design with NAT/route tables, EC2 compute & EBS volumes, S3 bucket policies, CloudFront CDN, and WAF rules. Checkpoint: Working AWS identity, network, compute, and storage architecture.",
         videosCount: 5,
@@ -350,7 +350,7 @@ export const courses: Record<string, Course> = {
       {
         id: "devops-m3",
         number: "03",
-        title: "AWS Serverless, Security & Monitoring (Week 3 / Days 11–15 • Milestone Project 1)",
+        title: "AWS Serverless, Security & Monitoring (• Milestone Project 1: Secure Cloud Foundation on AWS)",
         description:
           "Extend AWS skills into serverless architecture, encryption, secrets, monitoring, and threat detection. Covers AWS Lambda & API Gateway CRUD APIs, AWS KMS envelope encryption & Secrets Manager CLI, CloudWatch metrics, alarms & Logs Insights, Security Hub & GuardDuty automated findings. Checkpoint: Project 1 — Secure Cloud Foundation on AWS.",
         videosCount: 5,
@@ -361,7 +361,7 @@ export const courses: Record<string, Course> = {
       {
         id: "devops-m4",
         number: "04",
-        title: "Azure Cloud Foundations (Week 4 / Days 16–20)",
+        title: "Azure Cloud Foundations",
         description:
           "Build the Azure equivalent of the cloud foundation: governance, networking, identity/secrets, compute, and monitoring. Covers Azure RBAC & custom Azure Policies, VNets, NSGs, VNet peering & Private Endpoints, Azure Key Vault & Managed Identities, Azure App Services & HTTP Functions, Azure Monitor Log Analytics & Application Gateway routing/WAF. Checkpoint: Azure governance, private networking, secrets, and compute.",
         videosCount: 5,
@@ -372,7 +372,7 @@ export const courses: Record<string, Course> = {
       {
         id: "devops-m5",
         number: "05",
-        title: "Docker & Containerization (Week 5 / Days 21–25)",
+        title: "Docker & Containerization",
         description:
           "Learn to package applications into secure, efficient containers and operate multi-container workloads. Covers Docker images vs. containers, Dockerfile layer caching, Docker networking & persistent volumes, Docker Compose 3-tier deployments, container registries (ACR/ECR) with vulnerability scanning, and multi-stage non-root build optimizations. Checkpoint: Container security and working multi-container apps.",
         videosCount: 5,
@@ -383,7 +383,7 @@ export const courses: Record<string, Course> = {
       {
         id: "devops-m6",
         number: "06",
-        title: "Kubernetes Fundamentals & Managed AKS/EKS (Week 6 / Days 26–30 • Milestone Project 2)",
+        title: "Kubernetes Fundamentals & Managed AKS/EKS (• Milestone Project 2: Containerized Application on Cloud Kubernetes)",
         description:
           "Move from containers to Kubernetes orchestration, networking, configuration, storage, and managed clusters. Covers Control-plane components, Pods, Deployments, ReplicaSets, Services (ClusterIP/NodePort/LoadBalancer), Ingress controllers, ConfigMaps, Secrets, PVCs, and managed AKS/EKS provisioning with node pools. Checkpoint: Project 2 — Containerized Application on Cloud Kubernetes.",
         videosCount: 5,
@@ -394,7 +394,7 @@ export const courses: Record<string, Course> = {
       {
         id: "devops-m7",
         number: "07",
-        title: "Advanced Kubernetes, Helm, Autoscaling & Security (Week 7 / Days 31–35)",
+        title: "Advanced Kubernetes, Helm, Autoscaling & Security",
         description:
           "Deepen Kubernetes skills through Helm packaging, autoscaling, RBAC, network security, cluster provisioning, and live debugging. Covers Helm charts, values.yaml & rollbacks, Karpenter & KEDA event-driven autoscaling vs. HPA, namespace-scoped RBAC, NetworkPolicies, Pod Security Standards, KOps cluster lifecycle, and kubectl troubleshooting (CrashLoopBackOff, ImagePullBackOff). Checkpoint: Advanced Kubernetes security and autoscaling.",
         videosCount: 5,
@@ -405,7 +405,7 @@ export const courses: Record<string, Course> = {
       {
         id: "devops-m8",
         number: "08",
-        title: "GitOps & CI/CD Tooling (Week 8 / Days 36–40)",
+        title: "GitOps & CI/CD Tooling",
         description:
           "Automate application delivery using GitOps and compare major CI/CD platforms. Covers GitOps principles & ArgoCD architecture, ArgoCD app-of-apps pattern with automated sync & self-heal, Jenkins declarative pipelines & Jenkinsfile plugins, GitHub Actions workflows, GitLab CI YAML, Azure DevOps YAML pipelines, and Harness progressive delivery. Checkpoint: Working GitOps deployment with comparative CI/CD tooling.",
         videosCount: 5,
@@ -416,7 +416,7 @@ export const courses: Record<string, Course> = {
       {
         id: "devops-m9",
         number: "09",
-        title: "CI/CD Design, Platform Engineering & Governance (Week 9 / Days 41–45 • Milestone Project 3)",
+        title: "CI/CD Design, Platform Engineering & Governance (• Milestone Project 3: End-to-End CI/CD with GitOps)",
         description:
           "Design production-oriented delivery workflows, internal developer platforms, landing zones, and cloud governance. Covers end-to-end pipeline promotion strategies (build-test-scan-deploy), internal developer platforms & golden paths, cloud tagging policies & cost governance, PowerShell & Java automation scripting. Checkpoint: Project 3 — End-to-End CI/CD with GitOps.",
         videosCount: 5,
@@ -427,7 +427,7 @@ export const courses: Record<string, Course> = {
       {
         id: "devops-m10",
         number: "10",
-        title: "Infrastructure as Code: Terraform, Ansible & Policy as Code (Week 10 / Days 46–50)",
+        title: "Infrastructure as Code: Terraform, Ansible & Policy as Code",
         description:
           "Automate infrastructure provisioning and configuration management with declarative policy enforcement. Covers Terraform providers, resources, state lifecycle, reusable Terraform modules, S3/Azure remote state with state locking, Ansible inventory, playbooks, roles & idempotency, and Open Policy Agent (OPA) Rego & Sentinel policy guardrails. Checkpoint: Modular Terraform, remote state, and policy-as-code guardrails.",
         videosCount: 5,
@@ -438,7 +438,7 @@ export const courses: Record<string, Course> = {
       {
         id: "devops-m11",
         number: "11",
-        title: "Security & Compliance (Week 11 / Days 51–55)",
+        title: "Security & Compliance",
         description:
           "Apply comprehensive DevSecOps practices across identity, secrets, cloud posture, code quality, and secret scanning. Covers IAM policy evaluation & permission boundaries, HashiCorp Vault dynamic database secrets & rotation, Wiz Cloud Security Posture Management (CSPM), SonarQube code quality gates & SAST CI integration, TruffleHog & GitGuardian secret scanning with pre-commit hooks. Checkpoint: DevSecOps least-privilege, CSPM, SAST, and secret controls.",
         videosCount: 5,
@@ -449,7 +449,7 @@ export const courses: Record<string, Course> = {
       {
         id: "devops-m12",
         number: "12",
-        title: "Observability, GenAI for DevOps & Final Capstone (Week 12 / Days 56–60 • Final Capstone)",
+        title: "Observability, GenAI for DevOps & Final Capstone (• Final Capstone: Enterprise-Grade DevOps Platform)",
         description:
           "Full-stack observability and cutting-edge GenAI for real-world DevOps workflows. Covers Datadog & Dynatrace APM with distributed tracing, ELK Stack & Splunk log indexing with Kibana dashboards, Prometheus scraping & Grafana PromQL alerting, Ollama local LLMs & OpenAI API log analysis agents for automated root cause analysis. Checkpoint: Final Capstone Project — Enterprise-Grade DevOps Platform.",
         videosCount: 5,
@@ -495,7 +495,7 @@ export const courses: Record<string, Course> = {
     certificate: {
       title: "Earn your certificate",
       description:
-        "Complete all 12 modules, submit daily hands-on assignments across 60 days, and deliver all 4 milestone projects including the Final Enterprise Capstone to earn your recognized DevOps Engineering Credential.",
+        "Complete all 12 modules, submit hands-on assignments, and deliver all 4 milestone projects including the Final Enterprise Capstone to earn your recognized DevOps Engineering Credential.",
       credentialNote: "Certificate of Completion — DevOps Engineering",
     },
   },
